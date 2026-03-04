@@ -10,6 +10,7 @@ use Filament\Resources\Pages\ManageRelatedRecords;
 use Filament\Actions\CreateAction;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\EditAction;
+use Filament\Actions\ViewAction;
 use Filament\Tables\Table;
 
 class ManageSystemUsers extends ManageRelatedRecords
@@ -28,6 +29,7 @@ class ManageSystemUsers extends ManageRelatedRecords
                 CreateAction::make(),
             ])
             ->recordActions([
+                ViewAction::make(),
                 EditAction::make(),
                 DeleteAction::make(),
             ]);

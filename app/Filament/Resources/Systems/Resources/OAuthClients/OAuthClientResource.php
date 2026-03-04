@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Filament\Resources\Systems\Resources\OauthClients;
+namespace App\Filament\Resources\Systems\Resources\OAuthClients;
 
 use App\Filament\App\Resources\OAuthClients\Schemas\OAuthClientForm;
 use App\Filament\App\Resources\OAuthClients\Tables\OAuthClientsTable;
-use App\Filament\Resources\Systems\Resources\OauthClients\Pages\CreateOauthClient;
-use App\Filament\Resources\Systems\Resources\OauthClients\Pages\EditOauthClient;
+use App\Filament\Resources\Systems\Resources\OAuthClients\Pages\CreateOauthClient;
+use App\Filament\Resources\Systems\Resources\OAuthClients\Pages\EditOauthClient;
 use App\Filament\Resources\Systems\Resources\OauthClients\Pages\ViewOauthClient;
-use App\Filament\Resources\Systems\Resources\OauthClients\Schemas\OauthClientInfolist;
 use App\Filament\Resources\Systems\SystemResource;
 use App\Models\OauthClient;
 use BackedEnum;
@@ -26,15 +25,17 @@ class OauthClientResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'name';
 
+    public static function getParentResourceRegistration(): \Filament\Resources\ParentResourceRegistration
+    {
+        return parent::getParentResourceRegistration()
+            ->relationship('clients')
+            ->inverseRelationship('system');
+    }
+
     public static function form(Schema $schema): Schema
     {
         return OAuthClientForm::configure($schema);
     }
-
-    // public static function infolist(Schema $schema): Schema
-    // {
-    //     return OauthClientInfolist::configure($schema);
-    // }
 
     public static function table(Table $table): Table
     {

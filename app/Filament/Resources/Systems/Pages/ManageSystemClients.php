@@ -4,11 +4,11 @@ namespace App\Filament\Resources\Systems\Pages;
 
 use App\Filament\Resources\Systems\Resources\OAuthClients\OAuthClientResource;
 use App\Filament\Resources\Systems\SystemResource;
-use App\Models\OAuthClient;
 use Filament\Resources\Pages\ManageRelatedRecords;
 use Filament\Actions\CreateAction;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\EditAction;
+use Filament\Actions\ViewAction;
 use Filament\Tables\Table;
 
 class ManageSystemClients extends ManageRelatedRecords
@@ -17,7 +17,7 @@ class ManageSystemClients extends ManageRelatedRecords
 
     protected static string $relationship = 'clients';
 
-    protected static ?string $relatedResource = OAuthClientResource::class;
+    protected static ?string $relatedResource = OauthClientResource::class;
 
     public function table(Table $table): Table
     {
@@ -26,6 +26,7 @@ class ManageSystemClients extends ManageRelatedRecords
                 CreateAction::make(),
             ])
             ->recordActions([
+                ViewAction::make(),
                 EditAction::make(),
                 DeleteAction::make(),
             ]);

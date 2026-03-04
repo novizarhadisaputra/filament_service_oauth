@@ -33,7 +33,15 @@ class UserForm
                     ->description('Assign system-specific roles to this user.')
                     ->components([
                         CheckboxList::make('roles')
-                            ->relationship('roles', 'name', fn ($query) => $query->where('roles.team_id', Filament::getTenant()->id))
+                            ->relationship('roles', 'name', function ($query) {
+                                $teamId = Filament::getTenant()?->id ?? request()->route('system') ?? request()->route('record');
+
+                                if ($teamId) {
+                                    return $query->where('roles.team_id', $teamId);
+                                }
+
+                                return $query;
+                            })
                             ->saveRelationshipsUsing(function (User $record, $state) {
                                 $record->syncRoles($state);
                             })

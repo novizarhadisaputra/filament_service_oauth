@@ -2,6 +2,8 @@
 
 namespace App\Filament\App\Resources\OAuthClients\Schemas;
 
+use App\Enums\GrantType;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Schemas\Components\Grid;
@@ -30,10 +32,10 @@ class OAuthClientForm
                 Section::make('Grant Configuration')
                     ->description('Specify how this client can authenticate.')
                     ->components([
-                        TextInput::make('grant_types')
+                        Select::make('grant_types')
                             ->label('Grant Types')
-                            ->placeholder('password, authorization_code, refresh_token')
-                            ->helperText('Comma-separated list of allowed grant types.')
+                            ->options(GrantType::class)
+                            ->multiple()
                             ->required(),
                         Grid::make(2)
                             ->components([

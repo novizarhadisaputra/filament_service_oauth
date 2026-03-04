@@ -7,7 +7,6 @@ use App\Filament\App\Resources\Users\Tables\UsersTable;
 use App\Filament\Resources\Systems\Resources\Users\Pages\CreateUser;
 use App\Filament\Resources\Systems\Resources\Users\Pages\EditUser;
 use App\Filament\Resources\Systems\Resources\Users\Pages\ViewUser;
-use App\Filament\Resources\Systems\Resources\Users\Schemas\UserInfolist;
 use App\Filament\Resources\Systems\SystemResource;
 use App\Models\User;
 use BackedEnum;
@@ -26,15 +25,17 @@ class UserResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'email';
 
+    public static function getParentResourceRegistration(): \Filament\Resources\ParentResourceRegistration
+    {
+        return parent::getParentResourceRegistration()
+            ->relationship('users')
+            ->inverseRelationship('systems');
+    }
+
     public static function form(Schema $schema): Schema
     {
         return UserForm::configure($schema);
     }
-
-    // public static function infolist(Schema $schema): Schema
-    // {
-    //     return UserInfolist::configure($schema);
-    // }
 
     public static function table(Table $table): Table
     {
