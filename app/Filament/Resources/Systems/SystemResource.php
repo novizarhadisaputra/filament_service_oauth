@@ -59,7 +59,11 @@ class SystemResource extends Resource
             'index' => ListSystems::route('/'),
             'create' => CreateSystem::route('/create'),
             'edit' => EditSystem::route('/{record}/edit'),
+
+            // Nested User Routes
             'users' => ManageSystemUsers::route('/{record}/users'),
+
+            // Nested OAuth Client Routes
             'clients' => ManageSystemClients::route('/{record}/clients'),
         ];
     }

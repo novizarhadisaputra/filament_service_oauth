@@ -4,39 +4,56 @@ namespace App\Filament\Resources\Systems\Resources\Users;
 
 use App\Filament\App\Resources\Users\Schemas\UserForm;
 use App\Filament\App\Resources\Users\Tables\UsersTable;
-use App\Filament\Resources\Systems\Resources\Users\Pages\CreateSystemUser;
-use App\Filament\Resources\Systems\Resources\Users\Pages\EditSystemUser;
-use App\Filament\Resources\Systems\Resources\Users\Pages\ListSystemUsers;
+use App\Filament\Resources\Systems\Resources\Users\Pages\CreateUser;
+use App\Filament\Resources\Systems\Resources\Users\Pages\EditUser;
+use App\Filament\Resources\Systems\Resources\Users\Pages\ViewUser;
+use App\Filament\Resources\Systems\Resources\Users\Schemas\UserInfolist;
 use App\Filament\Resources\Systems\SystemResource;
 use App\Models\User;
+use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
+use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 
 class UserResource extends Resource
 {
     protected static ?string $model = User::class;
 
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+
     protected static ?string $parentResource = SystemResource::class;
 
-    protected static bool $isDiscovered = false;
+    protected static ?string $recordTitleAttribute = 'email';
 
     public static function form(Schema $schema): Schema
     {
         return UserForm::configure($schema);
     }
 
+    // public static function infolist(Schema $schema): Schema
+    // {
+    //     return UserInfolist::configure($schema);
+    // }
+
     public static function table(Table $table): Table
     {
         return UsersTable::configure($table);
     }
 
+    public static function getRelations(): array
+    {
+        return [
+            //
+        ];
+    }
+
     public static function getPages(): array
     {
         return [
-            'index' => ListSystemUsers::route('/'),
-            'create' => CreateSystemUser::route('/create'),
-            'edit' => EditSystemUser::route('/{record}/edit'),
+            'create' => CreateUser::route('/create'),
+            'view' => ViewUser::route('/{record}'),
+            'edit' => EditUser::route('/{record}/edit'),
         ];
     }
 }
