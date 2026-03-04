@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Filament\App\Resources\OAuthClients\Pages;
+namespace App\Filament\Resources\Systems\Resources\OAuthClients\Pages;
 
-use App\Filament\App\Resources\OAuthClients\OAuthClientResource;
+use App\Filament\Resources\Systems\Resources\OAuthClients\OAuthClientResource;
 use Filament\Actions\DeleteAction;
 use Filament\Resources\Pages\EditRecord;
 
-class EditOAuthClient extends EditRecord
+class EditSystemClient extends EditRecord
 {
     protected static string $resource = OAuthClientResource::class;
 

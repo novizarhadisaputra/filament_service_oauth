@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Filament\App\Resources\OAuthClients\Pages;
+namespace App\Filament\Resources\Systems\Resources\OAuthClients\Pages;
 
-use App\Filament\App\Resources\OAuthClients\OAuthClientResource;
+use App\Filament\Resources\Systems\Resources\OAuthClients\OAuthClientResource;
 use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
 
-class ListOAuthClients extends ListRecords
+class ListSystemClients extends ListRecords
 {
     protected static string $resource = OAuthClientResource::class;
 

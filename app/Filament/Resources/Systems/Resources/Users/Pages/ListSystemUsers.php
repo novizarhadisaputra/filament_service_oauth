@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Filament\App\Resources\Users\Pages;
+namespace App\Filament\Resources\Systems\Resources\Users\Pages;
 
-use App\Filament\App\Resources\Users\UserResource;
+use App\Filament\Resources\Systems\Resources\Users\UserResource;
 use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
 
-class ListUsers extends ListRecords
+class ListSystemUsers extends ListRecords
 {
     protected static string $resource = UserResource::class;
 

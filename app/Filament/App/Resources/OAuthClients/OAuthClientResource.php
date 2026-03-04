@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\App\Resources;
+namespace App\Filament\App\Resources\OAuthClients;
 
 use App\Filament\App\Resources\OAuthClients\Pages\CreateOAuthClient;
 use App\Filament\App\Resources\OAuthClients\Pages\EditOAuthClient;
@@ -24,7 +24,9 @@ class OAuthClientResource extends Resource
 
     protected static string|\UnitEnum|null $navigationGroup = 'Identity Management';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static ?int $navigationSort = 3;
+
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedKey;
 
     public static function form(Schema $schema): Schema
     {

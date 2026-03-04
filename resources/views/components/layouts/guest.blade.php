@@ -3,6 +3,17 @@
 
 <head>
     <meta charset="utf-8">
+    <script>
+        // Bare minimum theme initialization to prevent flash
+        try {
+            if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia(
+                    '(prefers-color-scheme: dark)').matches)) {
+                document.documentElement.classList.add('dark')
+            } else {
+                document.documentElement.classList.remove('dark')
+            }
+        } catch (_) {}
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>{{ $title ?? 'Login' }} - {{ config('app.name') }}</title>
@@ -18,7 +29,8 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="antialiased mesh-gradient min-h-screen">
+<body class="antialiased mesh-gradient min-h-screen relative transition-colors duration-500">
+    <livewire:auth.theme-switcher />
     {{ $slot }}
 </body>
 

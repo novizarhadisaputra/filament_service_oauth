@@ -2,7 +2,7 @@
 
 namespace App\Filament\App\Resources\OAuthClients\Pages;
 
-use App\Filament\App\Resources\OAuthClientResource;
+use App\Filament\App\Resources\OAuthClients\OAuthClientResource;
 use Filament\Forms\Components\TextInput;
 use Filament\Resources\Pages\CreateRecord;
 use Filament\Schemas\Components\Wizard\Step;

@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Filament\App\Resources\Users\Pages;
+namespace App\Filament\Resources\Systems\Resources\Users\Pages;
 
-use App\Filament\App\Resources\Users\UserResource;
+use App\Filament\Resources\Systems\Resources\Users\UserResource;
 use Filament\Actions\DeleteAction;
 use Filament\Resources\Pages\EditRecord;
 
-class EditUser extends EditRecord
+class EditSystemUser extends EditRecord
 {
     protected static string $resource = UserResource::class;
 

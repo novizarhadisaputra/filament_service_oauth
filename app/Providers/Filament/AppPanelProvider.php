@@ -8,6 +8,7 @@ use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
 use Filament\Pages\Dashboard;
+use Filament\Pages\Enums\SubNavigationPosition;
 use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
@@ -27,10 +28,12 @@ class AppPanelProvider extends PanelProvider
         return $panel
             ->id('app')
             ->path('app')
+            ->viteTheme('resources/css/filament/app/theme.css')
             ->tenant(\App\Models\System::class, slugAttribute: 'slug')
             ->colors([
                 'primary' => Color::Teal,
             ])
+            ->subNavigationPosition(SubNavigationPosition::Start)
             ->navigationGroups([
                 'Identity Management',
             ])

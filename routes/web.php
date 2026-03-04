@@ -7,3 +7,5 @@ Route::get('/', function () {
 });
 
 Route::get('/login', \App\Livewire\Auth\Login::class)->name('login');
+Route::get('/forgot-password', \App\Livewire\Auth\ForgotPassword::class)->name('password.request');
+Route::get('/reset-password/{token}', \App\Livewire\Auth\ResetPassword::class)->name('password.reset');

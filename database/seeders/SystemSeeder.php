@@ -29,11 +29,30 @@ class SystemSeeder extends Seeder
             // Create system-specific roles
             foreach (['admin', 'operator', 'user'] as $roleName) {
                 // Ensure we use the custom Role model with UUID
-                \App\Models\Role::firstOrCreate([
+                $role = \App\Models\Role::firstOrCreate([
                     'name' => $roleName,
                     'guard_name' => 'web',
                     config('permission.column_names.team_foreign_key') => $system->id,
                 ]);
+
+                // Create a tenant admin if it's the 'admin' role
+                if ($roleName === 'admin') {
+                    $adminEmail = "admin-{$sysData['slug']}@health.id";
+                    $tenantAdmin = \App\Models\User::firstOrCreate(
+                        ['email' => $adminEmail],
+                        [
+                            'name' => "Admin {$sysData['name']}",
+                            'password' => \Illuminate\Support\Facades\Hash::make('password'),
+                        ]
+                    );
+
+                    // Set team context for assignment
+                    setPermissionsTeamId($system->id);
+                    if (! $tenantAdmin->hasRole('admin')) {
+                        $tenantAdmin->assignRole($role);
+                    }
+                    $system->users()->syncWithoutDetaching([$tenantAdmin->id]);
+                }
             }
         }
 

@@ -17,6 +17,8 @@ return [
 
     'shield_resource' => [
         'slug' => 'shield/roles',
+        'navigation_group' => 'Identity Management',
+        'navigation_sort' => 2,
         'show_model_path' => true,
         'cluster' => null,
         'tabs' => [
@@ -67,7 +69,7 @@ return [
     'super_admin' => [
         'enabled' => true,
         'name' => 'super_admin',
-        'define_via_gate' => false,
+        'define_via_gate' => true,
         'intercept_gate' => 'before',
     ],
 

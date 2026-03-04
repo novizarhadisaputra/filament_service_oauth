@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\App\Resources;
+namespace App\Filament\App\Resources\Users;
 
 use App\Filament\App\Resources\Users\Pages\CreateUser;
 use App\Filament\App\Resources\Users\Pages\EditUser;
@@ -9,6 +9,7 @@ use App\Filament\App\Resources\Users\Schemas\UserForm;
 use App\Filament\App\Resources\Users\Tables\UsersTable;
 use App\Models\User;
 use BackedEnum;
+use Filament\Resources\Pages\Page;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
@@ -28,7 +29,9 @@ class UserResource extends Resource
 
     protected static string|\UnitEnum|null $navigationGroup = 'Identity Management';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static ?int $navigationSort = 1;
+
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedUserGroup;
 
     public static function form(Schema $schema): Schema
     {
@@ -56,6 +59,13 @@ class UserResource extends Resource
         return [
             //
         ];
+    }
+
+    public static function getRecordSubNavigation(Page $page): array
+    {
+        return $page->generateNavigationItems([
+            EditUser::class,
+        ]);
     }
 
     public static function getPages(): array

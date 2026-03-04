@@ -19,11 +19,11 @@ class OAuthClientObserver
         }
 
         if (! $client->client_id) {
-            $client->client_id = (string) Str::random(40);
+            $client->client_id = 'client_'.Str::random(32);
         }
 
         if (! $client->client_secret) {
-            $client->client_secret = (string) Str::random(40);
+            $client->client_secret = 'secret_'.Str::random(32);
         }
 
         if (! $client->owner_id && $tenant = Filament::getTenant()) {

@@ -82,7 +82,16 @@ class User extends Authenticatable implements FilamentUser, HasTenants
 
     public function canAccessPanel(Panel $panel): bool
     {
-        return true; // Simplified for now
+        if ($panel->getId() === 'admin') {
+            return $this->hasRole(config('filament-shield.super_admin.name', 'super_admin'));
+        }
+
+        if ($panel->getId() === 'app') {
+            // Further restricted by canAccessTenant() but allows login if they have roles in the tenant
+            return true;
+        }
+
+        return false;
     }
 
     public function canAccessTenant(Model $tenant): bool
@@ -98,5 +107,15 @@ class User extends Authenticatable implements FilamentUser, HasTenants
     public function systems(): BelongsToMany
     {
         return $this->belongsToMany(System::class);
+    }
+
+    /**
+     * Send the password reset notification.
+     *
+     * @param  string  $token
+     */
+    public function sendPasswordResetNotification($token): void
+    {
+        \Illuminate\Support\Facades\Mail::to($this)->send(new \App\Mail\Auth\ResetPasswordMail($token, $this->email));
     }
 }
