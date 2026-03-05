@@ -17,6 +17,7 @@ return new class extends Migration
             $table->nullableUuidMorphs('owner');
             $table->string('name');
             $table->string('client_secret')->nullable();
+            $table->text('encrypted_secret')->nullable();
             $table->string('provider')->nullable();
             $table->text('redirect_uris');
             $table->text('grant_types')->nullable();

@@ -5,12 +5,12 @@ namespace App\Models;
 use App\Observers\OAuthClientObserver;
 use Database\Factories\OAuthClientFactory;
 use Filament\Facades\Filament;
+use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Contracts\Auth\Authenticatable;
 use Laravel\Passport\Client as PassportClient;
 
 #[ObservedBy(OAuthClientObserver::class)]
@@ -18,6 +18,14 @@ class OAuthClient extends PassportClient
 {
     /** @use HasFactory<OAuthClientFactory> */
     use HasFactory;
+
+    /**
+     * Get the identifier for the client.
+     */
+    public function getIdentifier()
+    {
+        return $this->client_id;
+    }
 
     protected static function booted()
     {
@@ -58,8 +66,10 @@ class OAuthClient extends PassportClient
             get: fn () => $this->client_secret,
             set: function (?string $value) {
                 $this->plainSecret = $value;
+
                 return [
-                    'client_secret' => $this->castAttributeAsHashedString('client_secret', $value)
+                    'client_secret' => \Illuminate\Support\Facades\Hash::make($value),
+                    'encrypted_secret' => \Illuminate\Support\Facades\Crypt::encryptString($value),
                 ];
             }
         );
@@ -73,13 +83,10 @@ class OAuthClient extends PassportClient
         return \Illuminate\Database\Eloquent\Casts\Attribute::make(
             get: fn () => $this->redirect_uris ? (is_array($this->redirect_uris) ? implode(',', $this->redirect_uris) : $this->redirect_uris) : null,
             set: fn (?string $value) => [
-                'redirect_uris' => json_encode(explode(',', $value))
+                'redirect_uris' => json_encode(explode(',', $value)),
             ]
         );
     }
-
-
-
 
     /**
      * Create a new factory instance for the model.
@@ -101,9 +108,12 @@ class OAuthClient extends PassportClient
         'owner_type',
         'name',
         'client_secret',
+        'encrypted_secret',
         'provider',
         'redirect_uris',
         'grant_types',
+        'password_client',
+        'personal_access_client',
         'revoked',
     ];
 
@@ -114,8 +124,6 @@ class OAuthClient extends PassportClient
 
     /**
      * Determine if the client should skip the authorization prompt.
-     *
-     * @return bool
      */
     public function skipsAuthorization(Authenticatable $user, array $scopes): bool
     {

@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Filament\Resources\Systems\Resources\OauthClients\Pages;
+namespace App\Filament\Resources\Systems\Resources\OAuthClients\Pages;
 
-use App\Filament\Resources\Systems\Resources\OauthClients\OauthClientResource;
+use App\Filament\Resources\Systems\Resources\OAuthClients\SystemsOAuthClientResource;
 use Filament\Actions\EditAction;
 use Filament\Resources\Pages\ViewRecord;
 
-class ViewOauthClient extends ViewRecord
+class ViewOAuthClient extends ViewRecord
 {
-    protected static string $resource = OauthClientResource::class;
+    protected static string $resource = SystemsOAuthClientResource::class;
 
     protected function getHeaderActions(): array
     {

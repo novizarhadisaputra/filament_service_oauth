@@ -4,20 +4,20 @@ namespace App\Filament\Resources\Systems\Resources\OAuthClients;
 
 use App\Filament\App\Resources\OAuthClients\Schemas\OAuthClientForm;
 use App\Filament\App\Resources\OAuthClients\Tables\OAuthClientsTable;
-use App\Filament\Resources\Systems\Resources\OAuthClients\Pages\CreateOauthClient;
-use App\Filament\Resources\Systems\Resources\OAuthClients\Pages\EditOauthClient;
-use App\Filament\Resources\Systems\Resources\OauthClients\Pages\ViewOauthClient;
+use App\Filament\Resources\Systems\Resources\OAuthClients\Pages\CreateOAuthClient;
+use App\Filament\Resources\Systems\Resources\OAuthClients\Pages\EditOAuthClient;
+use App\Filament\Resources\Systems\Resources\OAuthClients\Pages\ViewOAuthClient;
 use App\Filament\Resources\Systems\SystemResource;
-use App\Models\OauthClient;
+use App\Models\OAuthClient;
 use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 
-class OauthClientResource extends Resource
+class SystemsOAuthClientResource extends Resource
 {
-    protected static ?string $model = OauthClient::class;
+    protected static ?string $model = OAuthClient::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
@@ -52,9 +52,9 @@ class OauthClientResource extends Resource
     public static function getPages(): array
     {
         return [
-            'create' => CreateOauthClient::route('/create'),
-            'view' => ViewOauthClient::route('/{record}'),
-            'edit' => EditOauthClient::route('/{record}/edit'),
+            'create' => CreateOAuthClient::route('/create'),
+            'view' => ViewOAuthClient::route('/{record}'),
+            'edit' => EditOAuthClient::route('/{record}/edit'),
         ];
     }
 }

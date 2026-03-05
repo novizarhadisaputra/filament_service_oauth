@@ -32,6 +32,7 @@ class AppServiceProvider extends ServiceProvider
             'write-appointments' => 'Create and manage medical appointments.',
         ]);
 
+
         Passport::useClientModel(\App\Models\OAuthClient::class);
 
         Passport::authorizationView(function () {

@@ -4,13 +4,12 @@ namespace App\Filament\Resources\Systems\Pages;
 
 use App\Filament\Resources\Systems\Resources\Users\UserResource;
 use App\Filament\Resources\Systems\SystemResource;
-use App\Models\User;
 use Filament\Actions\AttachAction;
-use Filament\Resources\Pages\ManageRelatedRecords;
 use Filament\Actions\CreateAction;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
+use Filament\Resources\Pages\ManageRelatedRecords;
 use Filament\Tables\Table;
 
 class ManageSystemUsers extends ManageRelatedRecords

@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Filament\Resources\Systems\Resources\OauthClients\Schemas;
+namespace App\Filament\Resources\Systems\Resources\OAuthClients\Schemas;
 
 use Filament\Schemas\Schema;
 
-class OauthClientForm
+class OAuthClientForm
 {
     public static function configure(Schema $schema): Schema
     {

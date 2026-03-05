@@ -14,16 +14,13 @@ class OAuthClientObserver
      */
     public function creating(OAuthClient $client): void
     {
-        if (! $client->id) {
-            $client->id = (string) Str::uuid();
-        }
-
         if (! $client->client_id) {
             $client->client_id = 'client_'.Str::random(32);
         }
 
         if (! $client->client_secret) {
-            $client->client_secret = 'secret_'.Str::random(32);
+            $secret = 'client_secret_'.Str::random(32);
+            $client->secret = $secret; // Triggers the model setter for hashing and encryption
         }
 
         if (! $client->owner_id && $tenant = Filament::getTenant()) {
