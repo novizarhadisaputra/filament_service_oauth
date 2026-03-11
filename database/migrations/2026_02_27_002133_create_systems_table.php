@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('system_code')->unique();
             $table->text('description')->nullable();
             $table->boolean('is_active')->default(true);
+            $table->boolean('requires_2fa')->default(false);
             $table->timestamps();
         });
     }

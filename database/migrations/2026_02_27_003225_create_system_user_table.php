@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create(\App\Support\SchemaHelper::oauth('system_user'), function (Blueprint $table) {
             $table->foreignUuid('system_id')->constrained(\App\Support\SchemaHelper::oauth('systems'))->cascadeOnDelete();
             $table->foreignUuid('user_id')->constrained(\App\Support\SchemaHelper::oauth('users'))->cascadeOnDelete();
+            $table->boolean('two_factor_enabled')->default(false);
             $table->timestamps();
 
             $table->primary(['system_id', 'user_id']);

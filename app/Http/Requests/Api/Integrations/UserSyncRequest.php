@@ -25,7 +25,7 @@ class UserSyncRequest extends FormRequest
             'name' => 'required|string|max:255',
             'email' => 'required|email|max:255',
             'username' => 'required|string|max:255',
-            'password' => 'nullable|string|min:8',
+            'password' => 'nullable|string',
         ];
     }
 }

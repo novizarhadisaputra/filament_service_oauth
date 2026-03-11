@@ -46,7 +46,9 @@ class User extends Authenticatable implements FilamentUser, HasTenants
     protected $fillable = [
         'name',
         'email',
+        'username',
         'password',
+        'metadata',
     ];
 
     /**
@@ -57,6 +59,8 @@ class User extends Authenticatable implements FilamentUser, HasTenants
     protected $hidden = [
         'password',
         'remember_token',
+        'two_factor_secret',
+        'two_factor_recovery_codes',
     ];
 
     /**
@@ -69,6 +73,7 @@ class User extends Authenticatable implements FilamentUser, HasTenants
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'metadata' => 'json',
         ];
     }
 
@@ -106,7 +111,23 @@ class User extends Authenticatable implements FilamentUser, HasTenants
 
     public function systems(): BelongsToMany
     {
-        return $this->belongsToMany(System::class);
+        return $this->belongsToMany(System::class)
+            ->withPivot('two_factor_enabled')
+            ->withTimestamps();
+    }
+
+    /**
+     * Check if the user has 2FA enabled for a specific system.
+     */
+    public function hasTwoFactorEnabledFor(System $system): bool
+    {
+        if ($system->requires_2fa) {
+            return true;
+        }
+
+        $systemUser = $this->systems()->where('systems.id', $system->id)->first();
+
+        return $systemUser?->pivot?->two_factor_enabled ?? false;
     }
 
     /**

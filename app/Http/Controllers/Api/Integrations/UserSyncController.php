@@ -29,6 +29,7 @@ class UserSyncController extends Controller
                 'name' => $request->name,
                 'email' => $request->email,
                 'username' => $request->username,
+                'metadata' => array_merge($user->metadata ?? [], $request->input('metadata', [])),
             ]);
         } else {
             $user = User::create([
@@ -36,6 +37,7 @@ class UserSyncController extends Controller
                 'email' => $request->email,
                 'username' => $request->username,
                 'password' => Hash::make($request->password ?? str()->random(32)),
+                'metadata' => $request->input('metadata', []),
             ]);
         }
 

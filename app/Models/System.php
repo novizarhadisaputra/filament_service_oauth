@@ -26,6 +26,7 @@ class System extends Model
         'system_code',
         'description',
         'is_active',
+        'requires_2fa',
     ];
 
     /**
@@ -37,6 +38,7 @@ class System extends Model
     {
         return [
             'is_active' => 'boolean',
+            'requires_2fa' => 'boolean',
         ];
     }
 
@@ -47,7 +49,9 @@ class System extends Model
 
     public function users(): BelongsToMany
     {
-        return $this->belongsToMany(User::class);
+        return $this->belongsToMany(User::class)
+            ->withPivot('two_factor_enabled')
+            ->withTimestamps();
     }
 
     public function clients(): MorphMany

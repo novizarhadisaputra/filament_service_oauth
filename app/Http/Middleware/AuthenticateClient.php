@@ -25,7 +25,7 @@ class AuthenticateClient
         }
 
         $client = DB::table('oauth_clients')
-            ->where('id', $clientId)
+            ->where('client_id', $clientId)
             ->first();
 
         if (! $client || ! password_verify($clientSecret, $client->client_secret)) {

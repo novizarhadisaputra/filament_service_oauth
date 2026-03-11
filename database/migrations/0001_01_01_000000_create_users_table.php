@@ -18,10 +18,15 @@ return new class extends Migration
         Schema::create(\App\Support\SchemaHelper::oauth('users'), function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('name');
+            $table->string('username')->unique()->nullable();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->text('two_factor_secret')->nullable();
+            $table->text('two_factor_recovery_codes')->nullable();
+            $table->timestamp('two_factor_confirmed_at')->nullable();
             $table->rememberToken();
+            $table->json('metadata')->nullable();
             $table->timestamps();
         });
 
