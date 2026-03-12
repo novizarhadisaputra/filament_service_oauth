@@ -2,6 +2,7 @@
 
 namespace App\Providers\Filament;
 
+use App\Models\System;
 use BezhanSalleh\FilamentShield\FilamentShieldPlugin;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
@@ -29,7 +30,7 @@ class AppPanelProvider extends PanelProvider
             ->id('app')
             ->path('app')
             ->viteTheme('resources/css/filament/app/theme.css')
-            ->tenant(\App\Models\System::class, slugAttribute: 'slug')
+            ->tenant(System::class, slugAttribute: 'slug')
             ->colors([
                 'primary' => Color::Teal,
             ])

@@ -108,9 +108,19 @@ class AuthController extends Controller
      */
     public function user(Request $request): UserResource
     {
+        $user = $request->user();
+
+        // Handle System/Team context for scoped roles/permissions
+        if ($request->has('system_slug')) {
+            $system = System::where('slug', $request->query('system_slug'))->first();
+            if ($system) {
+                setPermissionsTeamId($system->id);
+            }
+        }
+
         UserResource::withoutWrapping();
 
-        return new UserResource($request->user());
+        return new UserResource($user);
     }
 
     /**

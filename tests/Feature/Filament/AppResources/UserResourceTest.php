@@ -6,24 +6,26 @@ use App\Models\Permission;
 use App\Models\Role;
 use App\Models\System;
 use App\Models\User;
+use Filament\Facades\Filament;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Livewire\Livewire;
+use Spatie\Permission\PermissionRegistrar;
 
 use function Pest\Laravel\actingAs;
 
 uses(RefreshDatabase::class);
 
 beforeEach(function () {
-    /** @var \Tests\TestCase $this */
+    /** @var Tests\TestCase $this */
     $this->system = System::factory()->create();
-    app(\Spatie\Permission\PermissionRegistrar::class)->setPermissionsTeamId($this->system->id);
+    app(PermissionRegistrar::class)->setPermissionsTeamId($this->system->id);
 
     $this->user = User::factory()->create();
     $this->user->systems()->attach($this->system);
 
-    \Filament\Facades\Filament::setCurrentPanel(\Filament\Facades\Filament::getPanel('app'));
+    Filament::setCurrentPanel(Filament::getPanel('app'));
     actingAs($this->user);
-    \Filament\Facades\Filament::setTenant($this->system);
+    Filament::setTenant($this->system);
 
     $permissions = [
         'ViewAny:User',
@@ -45,7 +47,7 @@ beforeEach(function () {
 });
 
 test('can list users for tenant', function () {
-    /** @var \Tests\TestCase $this */
+    /** @var Tests\TestCase $this */
     $otherUser = User::factory()->create(); // UserObserver will auto-attach to $this->system
 
     Livewire::test(ListUsers::class, ['tenant' => $this->system->id])
@@ -53,7 +55,7 @@ test('can list users for tenant', function () {
 });
 
 test('cannot see users from other tenant', function () {
-    /** @var \Tests\TestCase $this */
+    /** @var Tests\TestCase $this */
     $otherSystem = System::factory()->create();
 
     $otherUser = null;
@@ -67,7 +69,7 @@ test('cannot see users from other tenant', function () {
 });
 
 test('can create user and assign roles for tenant', function () {
-    /** @var \Tests\TestCase $this */
+    /** @var Tests\TestCase $this */
     $role = Role::create([
         'name' => 'Support',
         'guard_name' => 'web',

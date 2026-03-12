@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\Integrations\PermissionSyncController;
+use App\Http\Controllers\Api\Integrations\UserSyncController;
 use Illuminate\Support\Facades\Route;
 
 Route::post('/register', [AuthController::class, 'register']);
@@ -15,5 +17,6 @@ Route::middleware('auth:api')->group(function () {
 
 // General Integration API for JIT synchronization and other internal/external services
 Route::prefix('integrations')->middleware('client.auth')->group(function () {
-    Route::post('/users', [\App\Http\Controllers\Api\Integrations\UserSyncController::class, 'sync']);
+    Route::post('/users', [UserSyncController::class, 'sync']);
+    Route::post('/permissions', [PermissionSyncController::class, 'sync']);
 });

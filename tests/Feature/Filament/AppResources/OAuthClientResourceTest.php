@@ -6,31 +6,33 @@ use App\Models\OAuthClient;
 use App\Models\Permission;
 use App\Models\System;
 use App\Models\User;
+use Filament\Facades\Filament;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Livewire\Livewire;
+use Spatie\Permission\PermissionRegistrar;
 
 use function Pest\Laravel\actingAs;
 
 uses(RefreshDatabase::class);
 
 beforeEach(function () {
-    /** @var \Tests\TestCase $this */
+    /** @var Tests\TestCase $this */
     $this->system = System::factory()->create();
-    app(\Spatie\Permission\PermissionRegistrar::class)->setPermissionsTeamId($this->system->id);
+    app(PermissionRegistrar::class)->setPermissionsTeamId($this->system->id);
 
     $this->user = User::factory()->create();
     $this->user->systems()->attach($this->system);
 
-    \Filament\Facades\Filament::setCurrentPanel(\Filament\Facades\Filament::getPanel('app'));
+    Filament::setCurrentPanel(Filament::getPanel('app'));
     $this->withoutMiddleware();
 
-    /** @var \App\Models\User $testUser */
+    /** @var User $testUser */
     $testUser = $this->user;
     actingAs($testUser, 'web');
 
-    /** @var \App\Models\System $testSystem */
+    /** @var System $testSystem */
     $testSystem = $this->system;
-    \Filament\Facades\Filament::setTenant($testSystem);
+    Filament::setTenant($testSystem);
 
     // Create permissions manually for the test
     $permissions = [
@@ -54,7 +56,7 @@ beforeEach(function () {
 });
 
 test('can list oauth clients for tenant', function () {
-    /** @var \Tests\TestCase $this */
+    /** @var Tests\TestCase $this */
     $clients = OAuthClient::factory()->count(2)->create([
         'owner_id' => $this->system->id,
         'owner_type' => System::class,
@@ -66,7 +68,7 @@ test('can list oauth clients for tenant', function () {
 });
 
 test('cannot see oauth clients from other tenant', function () {
-    /** @var \Tests\TestCase $this */
+    /** @var Tests\TestCase $this */
     $otherSystem = System::factory()->create();
     $otherClient = OAuthClient::factory()->create([
         'owner_id' => User::factory()->create()->id,
@@ -79,7 +81,7 @@ test('cannot see oauth clients from other tenant', function () {
 });
 
 test('can create oauth client via wizard', function () {
-    /** @var \Tests\TestCase $this */
+    /** @var Tests\TestCase $this */
     Livewire::test(CreateOAuthClient::class, ['tenant' => $this->system->id])
         ->fillForm([
             'name' => 'Test Client',
@@ -100,7 +102,7 @@ test('can create oauth client via wizard', function () {
 });
 
 test('can revoke oauth client', function () {
-    /** @var \Tests\TestCase $this */
+    /** @var Tests\TestCase $this */
     $client = OAuthClient::factory()->create([
         'owner_id' => $this->system->id,
         'owner_type' => System::class,
@@ -115,7 +117,7 @@ test('can revoke oauth client', function () {
 });
 
 test('can regenerate oauth client secret', function () {
-    /** @var \Tests\TestCase $this */
+    /** @var Tests\TestCase $this */
     $client = OAuthClient::factory()->create([
         'owner_id' => $this->system->id,
         'owner_type' => System::class,

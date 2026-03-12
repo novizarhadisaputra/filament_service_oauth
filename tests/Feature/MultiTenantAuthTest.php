@@ -5,6 +5,7 @@ use App\Models\System;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Str;
+use Spatie\Permission\PermissionRegistrar;
 
 uses(RefreshDatabase::class);
 
@@ -51,7 +52,7 @@ test('user can have different roles in different systems', function () {
 
     // Role in Absensi
     setPermissionsTeamId($absensi->id);
-    app(\Spatie\Permission\PermissionRegistrar::class)->forgetCachedPermissions();
+    app(PermissionRegistrar::class)->forgetCachedPermissions();
     $user->unsetRelation('roles')->unsetRelation('permissions');
 
     $absensiUser = Role::create(['name' => 'user', 'guard_name' => 'web', 'team_id' => $absensi->id]);
@@ -62,7 +63,7 @@ test('user can have different roles in different systems', function () {
 
     // Check back in SIMRS
     setPermissionsTeamId($simrs->id);
-    app(\Spatie\Permission\PermissionRegistrar::class)->forgetCachedPermissions();
+    app(PermissionRegistrar::class)->forgetCachedPermissions();
     $user->unsetRelation('roles')->unsetRelation('permissions');
 
     expect($user->hasRole('admin'))->toBeTrue();

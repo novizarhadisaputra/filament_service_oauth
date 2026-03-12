@@ -2,7 +2,10 @@
 
 namespace App\Providers;
 
+use App\Models\OAuthClient;
+use App\Repositories\CustomClientRepository;
 use Illuminate\Support\ServiceProvider;
+use Laravel\Passport\ClientRepository;
 use Laravel\Passport\Passport;
 
 class AppServiceProvider extends ServiceProvider
@@ -13,8 +16,8 @@ class AppServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->app->singleton(
-            \Laravel\Passport\ClientRepository::class,
-            \App\Repositories\CustomClientRepository::class
+            ClientRepository::class,
+            CustomClientRepository::class
         );
     }
 
@@ -33,7 +36,7 @@ class AppServiceProvider extends ServiceProvider
         ]);
 
 
-        Passport::useClientModel(\App\Models\OAuthClient::class);
+        Passport::useClientModel(OAuthClient::class);
 
         Passport::authorizationView(function () {
             return response('Authorization View Not Configured', 500);

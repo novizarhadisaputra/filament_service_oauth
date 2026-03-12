@@ -2,11 +2,14 @@
 
 use App\Filament\Resources\Systems\Pages\CreateSystem;
 use App\Filament\Resources\Systems\Pages\ListSystems;
+use App\Models\Permission;
 use App\Models\Role;
 use App\Models\System;
 use App\Models\User;
+use Filament\Facades\Filament;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Livewire\Livewire;
+use Spatie\Permission\PermissionRegistrar;
 
 use function Pest\Laravel\actingAs;
 
@@ -14,7 +17,7 @@ uses(RefreshDatabase::class);
 
 beforeEach(function () {
     $this->system = System::factory()->create();
-    app(\Spatie\Permission\PermissionRegistrar::class)->setPermissionsTeamId($this->system->id);
+    app(PermissionRegistrar::class)->setPermissionsTeamId($this->system->id);
 
     // Create permissions manually for the test
     $permissions = [
@@ -27,7 +30,7 @@ beforeEach(function () {
     ];
 
     foreach ($permissions as $permission) {
-        \App\Models\Permission::firstOrCreate([
+        Permission::firstOrCreate([
             'name' => $permission,
             'guard_name' => 'web',
         ]);
@@ -44,7 +47,7 @@ beforeEach(function () {
     $this->user->assignRole($role);
     $this->system->users()->attach($this->user);
 
-    \Filament\Facades\Filament::setCurrentPanel(\Filament\Facades\Filament::getPanel('admin'));
+    Filament::setCurrentPanel(Filament::getPanel('admin'));
     $this->withoutMiddleware();
     actingAs($this->user, 'web');
 });
