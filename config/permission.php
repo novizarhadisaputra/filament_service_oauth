@@ -2,7 +2,6 @@
 
 use App\Models\Permission;
 use App\Models\Role;
-use DateInterval;
 use Spatie\Permission\DefaultTeamResolver;
 
 return [
