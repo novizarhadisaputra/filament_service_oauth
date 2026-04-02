@@ -27,6 +27,7 @@ class System extends Model
         'description',
         'is_active',
         'requires_2fa',
+        'is_internal',
     ];
 
     /**
@@ -39,6 +40,7 @@ class System extends Model
         return [
             'is_active' => 'boolean',
             'requires_2fa' => 'boolean',
+            'is_internal' => 'boolean',
         ];
     }
 

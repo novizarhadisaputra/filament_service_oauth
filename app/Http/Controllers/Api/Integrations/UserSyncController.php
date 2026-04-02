@@ -19,10 +19,14 @@ class UserSyncController extends Controller
      */
     public function sync(UserSyncRequest $request): JsonResponse
     {
-        // Try to find user by username or email
-        $user = User::where('username', $request->username)
-            ->orWhere('email', $request->email)
-            ->first();
+        // Try to find user by username or email (only check email if provided)
+        $query = User::where('username', $request->username);
+        
+        if ($request->filled('email')) {
+            $query->orWhere('email', $request->email);
+        }
+        
+        $user = $query->first();
 
         if ($user) {
             $user->update([

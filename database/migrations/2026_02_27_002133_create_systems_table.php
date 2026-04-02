@@ -19,6 +19,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->boolean('is_active')->default(true);
             $table->boolean('requires_2fa')->default(false);
+            $table->boolean('is_internal')->default(true);
             $table->timestamps();
         });
     }
