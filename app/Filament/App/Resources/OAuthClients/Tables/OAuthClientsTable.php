@@ -31,8 +31,7 @@ class OAuthClientsTable
                     ->searchable()
                     ->sortable()
                     ->fontFamily('mono')
-                    ->copyable()
-                    ->toggleable(),
+                    ->copyable(),
                 TextColumn::make('client_secret')
                     ->label('Client Secret')
                     ->fontFamily('mono')

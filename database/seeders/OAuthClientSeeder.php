@@ -30,10 +30,10 @@ class OAuthClientSeeder extends Seeder
             ['id' => '019ca721-0712-7001-a8a3-221b1dbba010'],
             [
                 'name' => 'Backend API Gateway',
-                'client_id' => 'backend-api-client-id-xyz',
-                'secret' => 'backend-api-secret-xyz',
+                'client_id' => 'client_8KCbozt4Ff6BgocEeftboEHVa54IAeuA',
+                'secret' => 'client_secret_jNwfwHZ9FwUM6nVlohFuzrtJebC2ggaI',
                 'provider' => null,
-                'redirect' => 'http://localhost:8002/api/v1/auth/sso/callback',
+                'redirect' => 'http://localhost:8002/api/v1/user/auth/sso/callback',
                 'personal_access_client' => false,
                 'password_client' => false,
                 'revoked' => false,
