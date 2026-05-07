@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\LoginRequest;
 use App\Http\Requests\Api\RegisterRequest;
+use App\Http\Requests\Api\Verify2faRequest;
 use App\Http\Resources\UserResource;
 use App\Models\System;
 use App\Models\User;
@@ -78,14 +79,8 @@ class AuthController extends Controller
     /**
      * Verify 2FA code and complete login.
      */
-    public function verify2fa(Request $request): JsonResponse
+    public function verify2fa(Verify2faRequest $request): JsonResponse
     {
-        $request->validate([
-            'user_id' => 'required|uuid|exists:users,id',
-            'code' => 'required|string|size:6',
-            'system_slug' => 'nullable|string|exists:systems,slug',
-        ]);
-
         $user = User::findOrFail($request->user_id);
 
         // TODO: Verify TOTP code here using a library like pragmarx/google2fa
