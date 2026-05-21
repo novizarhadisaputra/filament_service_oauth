@@ -41,5 +41,28 @@ class AppServiceProvider extends ServiceProvider
         Passport::authorizationView(function () {
             return response('Authorization View Not Configured', 500);
         });
+
+        // Register Webhook notification trigger on Role/Permission changes
+        \Illuminate\Support\Facades\Event::listen([
+            \Spatie\Permission\Events\RoleAttached::class,
+            \Spatie\Permission\Events\RoleDetached::class,
+            \Spatie\Permission\Events\PermissionAttached::class,
+            \Spatie\Permission\Events\PermissionDetached::class,
+        ], function () {
+            \App\Support\WebhookHelper::notifyBackendCacheInvalidation();
+        });
+
+        \App\Models\Role::saved(function () {
+            \App\Support\WebhookHelper::notifyBackendCacheInvalidation();
+        });
+        \App\Models\Role::deleted(function () {
+            \App\Support\WebhookHelper::notifyBackendCacheInvalidation();
+        });
+        \App\Models\Permission::saved(function () {
+            \App\Support\WebhookHelper::notifyBackendCacheInvalidation();
+        });
+        \App\Models\Permission::deleted(function () {
+            \App\Support\WebhookHelper::notifyBackendCacheInvalidation();
+        });
     }
 }
