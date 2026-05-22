@@ -113,6 +113,15 @@ class AuthController extends Controller
             if ($system) {
                 setPermissionsTeamId($system->id);
             }
+        } else {
+            // Fallback: Resolve system from the Passport client ID associated with the token
+            $token = $user->token();
+            if ($token && $token->client_id) {
+                $client = \App\Models\OAuthClient::where('client_id', $token->client_id)->first();
+                if ($client && $client->owner_id) {
+                    setPermissionsTeamId($client->owner_id);
+                }
+            }
         }
 
         UserResource::withoutWrapping();
