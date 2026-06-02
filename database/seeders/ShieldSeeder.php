@@ -41,6 +41,14 @@ class ShieldSeeder extends Seeder
                     "ViewAny:CarePlan","View:CarePlan","Create:CarePlan","Update:CarePlan","Delete:CarePlan",
                     "ViewAny:Scheduling","View:Scheduling","Create:Scheduling","Update:Scheduling","Delete:Scheduling",
                     "ViewAny:Medication","View:Medication",
+                    "ViewAny:KioskQueue","View:KioskQueue","Create:KioskQueue","Update:KioskQueue","Delete:KioskQueue",
+                    "ViewAny:Registration","View:Registration","Create:Registration","Update:Registration","Delete:Registration","Print:Registration",
+                    "ViewAny:Bed","View:Bed","Update:Bed",
+                    "ViewAny:PatientTransfer","View:PatientTransfer","Create:PatientTransfer","Update:PatientTransfer",
+                    "ViewAny:Invoices","View:Invoices","Create:Invoices","Update:Invoices","Print:Invoices",
+                    "ViewAny:Claim","View:Claim","Create:Claim","Update:Claim",
+                    "ViewAny:MealOrder","View:MealOrder","Create:MealOrder","Update:MealOrder",
+                    "ViewAny:Asset","View:Asset","Update:Asset",
                     "Manage:Cache"
                 ]
             },
@@ -60,7 +68,8 @@ class ShieldSeeder extends Seeder
                     "ViewAny:HealthRecord","View:HealthRecord",
                     "ViewAny:CarePlan","View:CarePlan","Create:CarePlan","Update:CarePlan",
                     "ViewAny:Scheduling","View:Scheduling","Create:Scheduling","Update:Scheduling","Delete:Scheduling",
-                    "ViewAny:Medication","View:Medication"
+                    "ViewAny:Medication","View:Medication",
+                    "ViewAny:Bed","ViewAny:PatientTransfer","View:PatientTransfer"
                 ]
             },
             {
@@ -79,7 +88,9 @@ class ShieldSeeder extends Seeder
                     "ViewAny:HealthRecord","View:HealthRecord",
                     "ViewAny:CarePlan","View:CarePlan","Create:CarePlan","Update:CarePlan",
                     "ViewAny:Scheduling","View:Scheduling",
-                    "ViewAny:Medication","View:Medication"
+                    "ViewAny:Medication","View:Medication",
+                    "ViewAny:Bed","View:Bed","Update:Bed",
+                    "ViewAny:PatientTransfer","View:PatientTransfer","Create:PatientTransfer","Update:PatientTransfer"
                 ]
             },
             {
@@ -102,7 +113,8 @@ class ShieldSeeder extends Seeder
                     "ViewAny:Soap","View:Soap",
                     "ViewAny:Assessment","View:Assessment",
                     "ViewAny:CarePlan","View:CarePlan","Create:CarePlan","Update:CarePlan",
-                    "ViewAny:Medication","View:Medication"
+                    "ViewAny:Medication","View:Medication",
+                    "ViewAny:MealOrder","View:MealOrder","Create:MealOrder","Update:MealOrder"
                 ]
             },
             {
@@ -113,6 +125,8 @@ class ShieldSeeder extends Seeder
                     "ViewAny:User","View:User","Create:User","Update:User",
                     "ViewAny:Role","View:Role","Create:Role","Update:Role","Sync:Role",
                     "ViewAny:OAuthClient","View:OAuthClient","Create:OAuthClient","Update:OAuthClient",
+                    "ViewAny:Invoices","View:Invoices","Create:Invoices","Update:Invoices","Print:Invoices",
+                    "ViewAny:Claim","View:Claim","Create:Claim","Update:Claim",
                     "Manage:Cache"
                 ]
             },
@@ -123,7 +137,10 @@ class ShieldSeeder extends Seeder
                 "permissions": [
                     "ViewAny:User","View:User",
                     "ViewAny:InternalReferral","View:InternalReferral",
-                    "ViewAny:Scheduling","View:Scheduling","Create:Scheduling","Update:Scheduling"
+                    "ViewAny:Scheduling","View:Scheduling","Create:Scheduling","Update:Scheduling",
+                    "ViewAny:KioskQueue","View:KioskQueue","Create:KioskQueue","Update:KioskQueue",
+                    "ViewAny:Registration","View:Registration","Create:Registration","Update:Registration","Print:Registration",
+                    "ViewAny:Bed","View:Bed"
                 ]
             },
             {
