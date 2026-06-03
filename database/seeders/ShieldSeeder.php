@@ -34,7 +34,7 @@ class ShieldSeeder extends Seeder
                     "ViewAny:SickLetter","View:SickLetter","Create:SickLetter","Update:SickLetter","Delete:SickLetter","Print:SickLetter","Void:SickLetter","Sign:SickLetter",
                     "ViewAny:Soap","View:Soap","Create:Soap","Update:Soap","Delete:Soap","Print:Soap","Sign:Soap","Audit:Soap",
                     "ViewAny:VitalSign","View:VitalSign","Create:VitalSign","Update:VitalSign","Verify:VitalSign",
-                    "ViewAny:Prescription","View:Prescription","Create:Prescription","Update:Prescription","Delete:Prescription","Print:Prescription","Void:Prescription","Review:Prescription","Dispense:Prescription","Verify:Prescription",
+                    "ViewAny:Prescription","View:Prescription","Create:Prescription","Update:Prescription","Delete:Prescription","Print:Prescription","Void:Prescription","Review:Prescription","Dispense:Prescription","Verify:Prescription","AccessAllDepots:Prescription",
                     "ViewAny:ExamOrder","View:ExamOrder","Create:ExamOrder","Update:ExamOrder","Delete:ExamOrder","Print:ExamOrder","Void:ExamOrder","Complete:ExamOrder","Approve:ExamOrder",
                     "ViewAny:Assessment","View:Assessment","Create:Assessment","Update:Assessment","Delete:Assessment","Sign:Assessment",
                     "ViewAny:HealthRecord","View:HealthRecord",
@@ -48,7 +48,10 @@ class ShieldSeeder extends Seeder
                     "ViewAny:Invoices","View:Invoices","Create:Invoices","Update:Invoices","Print:Invoices",
                     "ViewAny:Claim","View:Claim","Create:Claim","Update:Claim",
                     "ViewAny:MealOrder","View:MealOrder","Create:MealOrder","Update:MealOrder",
+                    "ViewAny:Department","View:Department",
+                    "ViewAny:Inventory","View:Inventory","Create:Inventory","Update:Inventory","Delete:Inventory","Approve:Inventory","Transfer:Inventory",
                     "ViewAny:Asset","View:Asset","Update:Asset",
+                    "View:Audit",
                     "Manage:Cache"
                 ]
             },
@@ -101,7 +104,8 @@ class ShieldSeeder extends Seeder
                     "ViewAny:Education","View:Education",
                     "ViewAny:Soap","View:Soap",
                     "ViewAny:Prescription","View:Prescription","Review:Prescription","Dispense:Prescription","Verify:Prescription","Print:Prescription",
-                    "ViewAny:Medication","View:Medication"
+                    "ViewAny:Medication","View:Medication",
+                    "ViewAny:Inventory","View:Inventory","Create:Inventory","Update:Inventory","Approve:Inventory","Transfer:Inventory"
                 ]
             },
             {
@@ -127,6 +131,8 @@ class ShieldSeeder extends Seeder
                     "ViewAny:OAuthClient","View:OAuthClient","Create:OAuthClient","Update:OAuthClient",
                     "ViewAny:Invoices","View:Invoices","Create:Invoices","Update:Invoices","Print:Invoices",
                     "ViewAny:Claim","View:Claim","Create:Claim","Update:Claim",
+                    "ViewAny:Inventory","View:Inventory","Create:Inventory","Update:Inventory","Approve:Inventory","Transfer:Inventory",
+                    "AccessAllDepots:Prescription",
                     "Manage:Cache"
                 ]
             },

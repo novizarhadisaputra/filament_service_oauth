@@ -35,6 +35,11 @@ class WebhookHelper
                     continue;
                 }
 
+                // Skip frontend Next.js applications since they don't have Spatie cache to clear
+                if (str_contains($uri, 'localhost:3000') || str_contains($uri, '127.0.0.1:3000')) {
+                    continue;
+                }
+
                 try {
                     $urlParts = parse_url($uri);
                     $scheme = $urlParts['scheme'] ?? 'http';
