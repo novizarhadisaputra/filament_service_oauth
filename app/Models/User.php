@@ -88,7 +88,7 @@ class User extends Authenticatable implements FilamentUser, HasTenants
     public function canAccessPanel(Panel $panel): bool
     {
         if ($panel->getId() === 'admin') {
-            return $this->hasRole(config('filament-shield.super_admin.name', 'super_admin'));
+            return $this->hasRole('SuperAdmin') || $this->hasRole(config('filament-shield.super_admin.name', 'super_admin'));
         }
 
         if ($panel->getId() === 'app') {
