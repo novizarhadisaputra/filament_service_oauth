@@ -52,7 +52,8 @@ class ShieldSeeder extends Seeder
                     "ViewAny:Inventory","View:Inventory","Create:Inventory","Update:Inventory","Delete:Inventory","Approve:Inventory","Transfer:Inventory",
                     "ViewAny:Asset","View:Asset","Update:Asset",
                     "View:Audit",
-                    "Manage:Cache"
+                    "Manage:Cache",
+                    "ViewAny:MedicationReceive","Approve:MedicationReceive","Realize:MedicationReceiveUsed"
                 ]
             },
             {
@@ -93,7 +94,8 @@ class ShieldSeeder extends Seeder
                     "ViewAny:Scheduling","View:Scheduling",
                     "ViewAny:Medication","View:Medication",
                     "ViewAny:Bed","View:Bed","Update:Bed",
-                    "ViewAny:PatientTransfer","View:PatientTransfer","Create:PatientTransfer","Update:PatientTransfer"
+                    "ViewAny:PatientTransfer","View:PatientTransfer","Create:PatientTransfer","Update:PatientTransfer",
+                    "ViewAny:MedicationReceive","Approve:MedicationReceive","Realize:MedicationReceiveUsed"
                 ]
             },
             {
@@ -105,7 +107,8 @@ class ShieldSeeder extends Seeder
                     "ViewAny:Soap","View:Soap",
                     "ViewAny:Prescription","View:Prescription","Review:Prescription","Dispense:Prescription","Verify:Prescription","Print:Prescription",
                     "ViewAny:Medication","View:Medication",
-                    "ViewAny:Inventory","View:Inventory","Create:Inventory","Update:Inventory","Approve:Inventory","Transfer:Inventory"
+                    "ViewAny:Inventory","View:Inventory","Create:Inventory","Update:Inventory","Approve:Inventory","Transfer:Inventory",
+                    "ViewAny:MedicationReceive","Approve:MedicationReceive"
                 ]
             },
             {
