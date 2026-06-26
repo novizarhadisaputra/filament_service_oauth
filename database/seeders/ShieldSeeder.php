@@ -53,7 +53,8 @@ class ShieldSeeder extends Seeder
                     "ViewAny:Asset","View:Asset","Update:Asset",
                     "View:Audit",
                     "Manage:Cache",
-                    "ViewAny:MedicationReceive","Approve:MedicationReceive","Realize:MedicationReceiveUsed"
+                    "ViewAny:MedicationReceive","Approve:MedicationReceive","Realize:MedicationReceiveUsed",
+                    "ViewAny:QuestionForm","View:QuestionForm","Create:QuestionForm","Update:QuestionForm","Delete:QuestionForm"
                 ]
             },
             {
@@ -136,7 +137,8 @@ class ShieldSeeder extends Seeder
                     "ViewAny:Claim","View:Claim","Create:Claim","Update:Claim",
                     "ViewAny:Inventory","View:Inventory","Create:Inventory","Update:Inventory","Approve:Inventory","Transfer:Inventory",
                     "AccessAllDepots:Prescription",
-                    "Manage:Cache"
+                    "Manage:Cache",
+                    "ViewAny:QuestionForm","View:QuestionForm","Create:QuestionForm","Update:QuestionForm","Delete:QuestionForm"
                 ]
             },
             {
