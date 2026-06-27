@@ -54,7 +54,8 @@ class ShieldSeeder extends Seeder
                     "View:Audit",
                     "Manage:Cache",
                     "ViewAny:MedicationReceive","Approve:MedicationReceive","Realize:MedicationReceiveUsed",
-                    "ViewAny:QuestionForm","View:QuestionForm","Create:QuestionForm","Update:QuestionForm","Delete:QuestionForm"
+                    "ViewAny:QuestionForm","View:QuestionForm","Create:QuestionForm","Update:QuestionForm","Delete:QuestionForm",
+                    "ViewAny:AppParameter","Update:AppParameter"
                 ]
             },
             {
@@ -138,7 +139,8 @@ class ShieldSeeder extends Seeder
                     "ViewAny:Inventory","View:Inventory","Create:Inventory","Update:Inventory","Approve:Inventory","Transfer:Inventory",
                     "AccessAllDepots:Prescription",
                     "Manage:Cache",
-                    "ViewAny:QuestionForm","View:QuestionForm","Create:QuestionForm","Update:QuestionForm","Delete:QuestionForm"
+                    "ViewAny:QuestionForm","View:QuestionForm","Create:QuestionForm","Update:QuestionForm","Delete:QuestionForm",
+                    "ViewAny:AppParameter","Update:AppParameter"
                 ]
             },
             {
