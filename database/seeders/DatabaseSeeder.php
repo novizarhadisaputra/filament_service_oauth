@@ -54,6 +54,17 @@ class DatabaseSeeder extends Seeder
                 ],
             ],
             [
+                'name' => 'dr. Maria Irawati, Sp.PD-KGH, KIC',
+                'email' => 'drmarias2005@yahoo.com',
+                'username' => 'dr.Maria',
+                'password' => Hash::make('123'),
+                'role' => 'Doctor',
+                'tenant' => $simrsTenantId,
+                'metadata' => [
+                    'paramedic_id' => 'MD-00127',
+                ],
+            ],
+            [
                 'name' => 'Ners Budi Santoso',
                 'email' => 'nurse@tarakan.local',
                 'username' => 'nurse',

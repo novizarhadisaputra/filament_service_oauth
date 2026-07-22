@@ -6,6 +6,8 @@ use BezhanSalleh\FilamentShield\Resources\Roles\RoleResource;
 use Filament\Pages\Dashboard;
 use Filament\Widgets\AccountWidget;
 use Filament\Widgets\FilamentInfoWidget;
+use Illuminate\Support\Facades\Facade;
+use Spatie\Permission\Models\Permission;
 
 return [
 
@@ -30,7 +32,7 @@ return [
             'pages' => true,
             'widgets' => true,
             'resources' => true,
-            'custom_permissions' => false,
+            'custom_permissions' => true,
         ],
     ],
 
@@ -236,7 +238,16 @@ return [
     |
     */
 
-    'custom_permissions' => [],
+    'custom_permissions' => (function () {
+        try {
+            if (Facade::class && Facade::hasFacadeApplication()) {
+                return Permission::pluck('name', 'name')->toArray();
+            }
+        } catch (\Throwable $e) {
+            // Ignore during early bootstrap
+        }
+        return [];
+    })(),
 
     /*
     |--------------------------------------------------------------------------
