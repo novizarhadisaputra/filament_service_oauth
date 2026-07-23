@@ -26,6 +26,9 @@ class UserSyncRequest extends FormRequest
             'email' => 'nullable|email|max:255',
             'username' => 'required|string|max:255',
             'password' => 'nullable|string',
+            'system_slug' => 'nullable|string|exists:systems,slug',
+            'roles' => 'nullable|array',
+            'roles.*' => 'string',
         ];
     }
 }

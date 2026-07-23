@@ -2,6 +2,7 @@
 
 namespace App\Filament\App\Resources\Users\Schemas;
 
+use App\Models\Role;
 use App\Models\User;
 use Filament\Facades\Filament;
 use Filament\Forms\Components\CheckboxList;
@@ -14,6 +15,15 @@ class UserForm
 {
     public static function configure(Schema $schema): Schema
     {
+        $systemParam = request()->route('system');
+        $teamId = ($systemParam instanceof \App\Models\System ? $systemParam->id : $systemParam)
+            ?? Filament::getTenant()?->id 
+            ?? request()->route('tenant');
+
+        if ($teamId) {
+            setPermissionsTeamId($teamId);
+        }
+
         return $schema
             ->components([
                 Section::make('User Identification')
@@ -33,17 +43,36 @@ class UserForm
                     ->description('Assign system-specific roles to this user.')
                     ->components([
                         CheckboxList::make('roles')
-                            ->relationship('roles', 'name', function ($query) {
-                                $teamId = Filament::getTenant()?->id ?? request()->route('system') ?? request()->route('record');
+                            ->options(function ($livewire) {
+                                $parentSystem = method_exists($livewire, 'getParentRecord') ? $livewire->getParentRecord() : null;
+                                $systemParam = request()->route('system');
+                                $teamId = $parentSystem?->id
+                                    ?? ($systemParam instanceof \App\Models\System ? $systemParam->id : $systemParam)
+                                    ?? Filament::getTenant()?->id 
+                                    ?? request()->route('tenant');
 
                                 if ($teamId) {
-                                    return $query->where('roles.team_id', $teamId);
+                                    setPermissionsTeamId($teamId);
+                                    return Role::where('team_id', $teamId)->pluck('name', 'id');
                                 }
 
-                                return $query;
+                                return Role::pluck('name', 'id');
                             })
-                            ->saveRelationshipsUsing(function (User $record, $state) {
-                                $record->syncRoles($state);
+                            ->loadStateFromRelationshipsUsing(function (User $record, $livewire) {
+                                $parentSystem = method_exists($livewire, 'getParentRecord') ? $livewire->getParentRecord() : null;
+                                $systemParam = request()->route('system');
+                                $teamId = $parentSystem?->id
+                                    ?? ($systemParam instanceof \App\Models\System ? $systemParam->id : $systemParam)
+                                    ?? Filament::getTenant()?->id 
+                                    ?? request()->route('tenant');
+
+                                if ($teamId) {
+                                    setPermissionsTeamId($teamId);
+                                }
+
+                                $record->unsetRelation('roles');
+
+                                return $record->roles->pluck('id')->toArray();
                             })
                             ->required()
                             ->columns(3),

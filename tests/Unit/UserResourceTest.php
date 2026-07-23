@@ -4,12 +4,10 @@ namespace Tests\Unit;
 
 use App\Http\Resources\UserResource;
 use App\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class UserResourceTest extends TestCase
 {
-    use RefreshDatabase;
 
     public function test_user_resource_includes_metadata()
     {

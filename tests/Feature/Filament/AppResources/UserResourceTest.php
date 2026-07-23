@@ -7,13 +7,7 @@ use App\Models\Role;
 use App\Models\System;
 use App\Models\User;
 use Filament\Facades\Filament;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Livewire\Livewire;
-use Spatie\Permission\PermissionRegistrar;
-
 use function Pest\Laravel\actingAs;
-
-uses(RefreshDatabase::class);
 
 beforeEach(function () {
     /** @var Tests\TestCase $this */

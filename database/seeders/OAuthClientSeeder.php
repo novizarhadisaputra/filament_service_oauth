@@ -33,7 +33,7 @@ class OAuthClientSeeder extends Seeder
                 'client_id' => 'client_8KCbozt4Ff6BgocEeftboEHVa54IAeuA',
                 'secret' => 'client_secret_jNwfwHZ9FwUM6nVlohFuzrtJebC2ggaI',
                 'provider' => null,
-                'redirect' => env('BACKEND_REDIRECT_URI', 'http://localhost:8002/api/v1/user/auth/sso/callback'),
+                'redirect' => env('BACKEND_REDIRECT_URI', 'http://localhost:8002/api/v1/user/auth/sso/callback,http://88.88.8.73:8000/api/v1/user/auth/sso/callback'),
                 'personal_access_client' => false,
                 'password_client' => false,
                 'revoked' => false,

@@ -14,6 +14,9 @@ class UserResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+        $this->unsetRelation('roles');
+        $this->unsetRelation('permissions');
+
         return [
             'id' => $this->id,
             'name' => $this->name,

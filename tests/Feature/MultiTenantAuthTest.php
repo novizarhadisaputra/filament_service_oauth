@@ -3,11 +3,8 @@
 use App\Models\Role;
 use App\Models\System;
 use App\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Str;
 use Spatie\Permission\PermissionRegistrar;
-
-uses(RefreshDatabase::class);
 
 test('users are created with uuid', function () {
     $user = User::create([

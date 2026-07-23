@@ -1,9 +1,6 @@
 <?php
 
 use App\Models\OAuthClient;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-
-uses(RefreshDatabase::class);
 
 test('oauth client generates prefixed client_id and client_secret', function () {
     $client = new OAuthClient([
