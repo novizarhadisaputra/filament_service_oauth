@@ -16,8 +16,12 @@ class EditUser extends EditRecord
     public function mount(int|string $record): void
     {
         $parent = $this->getParentRecord();
-        if ($parent) {
-            setPermissionsTeamId($parent->id);
+        $systemParam = request()->route('system');
+        $teamId = $parent?->id
+            ?? ($systemParam instanceof \App\Models\System ? $systemParam->id : $systemParam);
+
+        if ($teamId) {
+            setPermissionsTeamId($teamId);
         }
         parent::mount($record);
     }
@@ -35,16 +39,24 @@ class EditUser extends EditRecord
     protected function beforeSave(): void
     {
         $parent = $this->getParentRecord();
-        if ($parent) {
-            setPermissionsTeamId($parent->id);
+        $systemParam = request()->route('system');
+        $teamId = $parent?->id
+            ?? ($systemParam instanceof \App\Models\System ? $systemParam->id : $systemParam);
+
+        if ($teamId) {
+            setPermissionsTeamId($teamId);
         }
     }
 
     protected function afterSave(): void
     {
         $parent = $this->getParentRecord();
-        if ($parent) {
-            setPermissionsTeamId($parent->id);
+        $systemParam = request()->route('system');
+        $teamId = $parent?->id
+            ?? ($systemParam instanceof \App\Models\System ? $systemParam->id : $systemParam);
+
+        if ($teamId) {
+            setPermissionsTeamId($teamId);
             $roles = \App\Models\Role::whereIn('id', $this->rolesToSave)->get();
             $this->record->syncRoles($roles);
             $this->record->unsetRelation('roles');

@@ -14,8 +14,12 @@ class CreateUser extends CreateRecord
     public function mount(): void
     {
         $parent = $this->getParentRecord();
-        if ($parent) {
-            setPermissionsTeamId($parent->id);
+        $systemParam = request()->route('system');
+        $teamId = $parent?->id
+            ?? ($systemParam instanceof \App\Models\System ? $systemParam->id : $systemParam);
+
+        if ($teamId) {
+            setPermissionsTeamId($teamId);
         }
         parent::mount();
     }
@@ -33,8 +37,12 @@ class CreateUser extends CreateRecord
     protected function afterCreate(): void
     {
         $parent = $this->getParentRecord();
-        if ($parent) {
-            setPermissionsTeamId($parent->id);
+        $systemParam = request()->route('system');
+        $teamId = $parent?->id
+            ?? ($systemParam instanceof \App\Models\System ? $systemParam->id : $systemParam);
+
+        if ($teamId) {
+            setPermissionsTeamId($teamId);
             $roles = \App\Models\Role::whereIn('id', $this->rolesToSave)->get();
             $this->record->syncRoles($roles);
             $this->record->unsetRelation('roles');

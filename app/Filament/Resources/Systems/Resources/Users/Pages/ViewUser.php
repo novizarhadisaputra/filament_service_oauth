@@ -10,6 +10,19 @@ class ViewUser extends ViewRecord
 {
     protected static string $resource = UserResource::class;
 
+    public function mount(int|string $record): void
+    {
+        $parent = $this->getParentRecord();
+        $systemParam = request()->route('system');
+        $teamId = $parent?->id
+            ?? ($systemParam instanceof \App\Models\System ? $systemParam->id : $systemParam);
+
+        if ($teamId) {
+            setPermissionsTeamId($teamId);
+        }
+        parent::mount($record);
+    }
+
     protected function getHeaderActions(): array
     {
         return [

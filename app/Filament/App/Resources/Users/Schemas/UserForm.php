@@ -58,7 +58,11 @@ class UserForm
 
                                 return Role::pluck('name', 'id');
                             })
-                            ->loadStateFromRelationshipsUsing(function (User $record, $livewire) {
+                            ->afterStateHydrated(function (CheckboxList $component, ?User $record, $livewire) {
+                                if (! $record) {
+                                    return;
+                                }
+
                                 $parentSystem = method_exists($livewire, 'getParentRecord') ? $livewire->getParentRecord() : null;
                                 $systemParam = request()->route('system');
                                 $teamId = $parentSystem?->id
@@ -68,12 +72,14 @@ class UserForm
 
                                 if ($teamId) {
                                     setPermissionsTeamId($teamId);
+                                    $roleIds = $record->roles()->where('roles.team_id', $teamId)->pluck('roles.id')->toArray();
+                                } else {
+                                    $roleIds = $record->roles->pluck('id')->toArray();
                                 }
 
-                                $record->unsetRelation('roles');
-
-                                return $record->roles->pluck('id')->toArray();
+                                $component->state($roleIds);
                             })
+                            ->dehydrated(true)
                             ->required()
                             ->columns(3),
                     ]),
