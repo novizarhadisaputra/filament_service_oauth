@@ -58,11 +58,11 @@ class AppServiceProvider extends ServiceProvider
         \App\Models\Role::deleted(function () {
             \App\Support\WebhookHelper::notifyBackendCacheInvalidation();
         });
-        \App\Models\Permission::saved(function () {
-            \App\Support\WebhookHelper::notifyBackendCacheInvalidation();
-        });
         \App\Models\Permission::deleted(function () {
             \App\Support\WebhookHelper::notifyBackendCacheInvalidation();
         });
+
+        // Register Filament Shield custom permissions & key composition
+        \App\Support\ShieldCustomPermissionsLoader::register();
     }
 }

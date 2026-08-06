@@ -184,7 +184,10 @@ return [
             ],
         ],
         'exclude' => [
-            //
+            \App\Filament\Resources\Systems\Resources\OAuthClients\SystemsOAuthClientResource::class,
+            \App\Filament\Resources\Systems\Resources\Users\UserResource::class,
+            \App\Filament\Resources\Roles\RoleResource::class,
+            RoleResource::class,
         ],
     ],
 
