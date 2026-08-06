@@ -76,25 +76,33 @@ class UserSyncController extends Controller
             setPermissionsTeamId($system->id);
         }
 
-        // Sync Roles if passed in payload, otherwise preserve existing OAuth roles or fallback to 'User'
-        $roleNames = $request->filled('roles') 
-            ? (array) $request->input('roles') 
-            : [];
+        // Sync Roles if non-empty roles passed in payload, otherwise preserve existing OAuth roles for this system or fallback to 'User'
+        $payloadRoles = array_filter((array) $request->input('roles', []));
+        
+        if (! empty($payloadRoles)) {
+            $roleNames = $payloadRoles;
+        } else {
+            $existingRoles = $user->roles()
+                ->where(function ($q) use ($system) {
+                    if ($system) {
+                        $q->where('roles.team_id', $system->id)
+                          ->orWhereNull('roles.team_id');
+                    }
+                })
+                ->pluck('name')
+                ->toArray();
 
-        if (empty($roleNames) && $user->roles()->count() === 0) {
-            $roleNames = ['User'];
+            $roleNames = ! empty($existingRoles) ? $existingRoles : ['User'];
         }
 
-        if (! empty($roleNames)) {
-            foreach ($roleNames as $roleName) {
-                Role::firstOrCreate([
-                    'name' => $roleName,
-                    'guard_name' => 'web',
-                    'team_id' => $system?->id,
-                ]);
-            }
-            $user->syncRoles($roleNames);
+        foreach ($roleNames as $roleName) {
+            Role::firstOrCreate([
+                'name' => $roleName,
+                'guard_name' => 'web',
+                'team_id' => $system?->id,
+            ]);
         }
+        $user->syncRoles($roleNames);
 
         return $this->successResponse(new UserResource($user), 'User synced successfully');
     }

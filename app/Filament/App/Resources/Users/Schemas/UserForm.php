@@ -3,6 +3,7 @@
 namespace App\Filament\App\Resources\Users\Schemas;
 
 use App\Models\Role;
+use App\Models\System;
 use App\Models\User;
 use Filament\Facades\Filament;
 use Filament\Forms\Components\CheckboxList;
@@ -16,7 +17,7 @@ class UserForm
     public static function configure(Schema $schema): Schema
     {
         $systemParam = request()->route('system');
-        $teamId = ($systemParam instanceof \App\Models\System ? $systemParam->id : $systemParam)
+        $teamId = ($systemParam instanceof System ? $systemParam->id : $systemParam)
             ?? Filament::getTenant()?->id 
             ?? request()->route('tenant');
 
@@ -28,11 +29,14 @@ class UserForm
             ->components([
                 Section::make('User Identification')
                     ->components([
-                        Grid::make(2)
+                        Grid::make(3)
                             ->components([
                                 TextInput::make('name')
                                     ->required()
                                     ->maxLength(255),
+                                TextInput::make('username')
+                                    ->maxLength(255)
+                                    ->unique(User::class, 'username', ignoreRecord: true),
                                 TextInput::make('email')
                                     ->email()
                                     ->required()
@@ -47,7 +51,7 @@ class UserForm
                                 $parentSystem = method_exists($livewire, 'getParentRecord') ? $livewire->getParentRecord() : null;
                                 $systemParam = request()->route('system');
                                 $teamId = $parentSystem?->id
-                                    ?? ($systemParam instanceof \App\Models\System ? $systemParam->id : $systemParam)
+                                    ?? ($systemParam instanceof System ? $systemParam->id : $systemParam)
                                     ?? Filament::getTenant()?->id 
                                     ?? request()->route('tenant');
 
@@ -66,7 +70,7 @@ class UserForm
                                 $parentSystem = method_exists($livewire, 'getParentRecord') ? $livewire->getParentRecord() : null;
                                 $systemParam = request()->route('system');
                                 $teamId = $parentSystem?->id
-                                    ?? ($systemParam instanceof \App\Models\System ? $systemParam->id : $systemParam)
+                                    ?? ($systemParam instanceof System ? $systemParam->id : $systemParam)
                                     ?? Filament::getTenant()?->id 
                                     ?? request()->route('tenant');
 

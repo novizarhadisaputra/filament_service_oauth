@@ -30,7 +30,18 @@ class ManageSystemUsers extends ManageRelatedRecords
             ->recordActions([
                 ViewAction::make(),
                 EditAction::make(),
-                DeleteAction::make(),
             ]);
+    }
+
+    public function getBreadcrumbs(): array
+    {
+        $resource = static::getResource();
+        $system = $this->getOwnerRecord();
+
+        return [
+            $resource::getUrl() => $resource::getBreadcrumb(),
+            $resource::getUrl('edit', ['record' => $system]) => $system->name,
+            'Users',
+        ];
     }
 }

@@ -26,7 +26,18 @@ class ManageSystemClients extends ManageRelatedRecords
     {
         return SystemsOAuthClientResource::table($table)
             ->headerActions([
-                CreateAction::make(),
             ]);
+    }
+
+    public function getBreadcrumbs(): array
+    {
+        $resource = static::getResource();
+        $system = $this->getOwnerRecord();
+
+        return [
+            $resource::getUrl() => $resource::getBreadcrumb(),
+            $resource::getUrl('edit', ['record' => $system]) => $system->name,
+            'OAuth Clients',
+        ];
     }
 }

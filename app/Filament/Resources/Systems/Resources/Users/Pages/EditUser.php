@@ -3,6 +3,8 @@
 namespace App\Filament\Resources\Systems\Resources\Users\Pages;
 
 use App\Filament\Resources\Systems\Resources\Users\UserResource;
+use App\Models\Role;
+use App\Models\System;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\ViewAction;
 use Filament\Resources\Pages\EditRecord;
@@ -18,7 +20,7 @@ class EditUser extends EditRecord
         $parent = $this->getParentRecord();
         $systemParam = request()->route('system');
         $teamId = $parent?->id
-            ?? ($systemParam instanceof \App\Models\System ? $systemParam->id : $systemParam);
+            ?? ($systemParam instanceof System ? $systemParam->id : $systemParam);
 
         if ($teamId) {
             setPermissionsTeamId($teamId);
@@ -41,7 +43,7 @@ class EditUser extends EditRecord
         $parent = $this->getParentRecord();
         $systemParam = request()->route('system');
         $teamId = $parent?->id
-            ?? ($systemParam instanceof \App\Models\System ? $systemParam->id : $systemParam);
+            ?? ($systemParam instanceof System ? $systemParam->id : $systemParam);
 
         if ($teamId) {
             setPermissionsTeamId($teamId);
@@ -53,11 +55,11 @@ class EditUser extends EditRecord
         $parent = $this->getParentRecord();
         $systemParam = request()->route('system');
         $teamId = $parent?->id
-            ?? ($systemParam instanceof \App\Models\System ? $systemParam->id : $systemParam);
+            ?? ($systemParam instanceof System ? $systemParam->id : $systemParam);
 
         if ($teamId) {
             setPermissionsTeamId($teamId);
-            $roles = \App\Models\Role::whereIn('id', $this->rolesToSave)->get();
+            $roles = Role::whereIn('id', $this->rolesToSave)->get();
             $this->record->syncRoles($roles);
             $this->record->unsetRelation('roles');
         }
