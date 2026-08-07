@@ -55,7 +55,8 @@ class ShieldSeeder extends Seeder
                     "Manage:Cache",
                     "ViewAny:MedicationReceive","Approve:MedicationReceive","Realize:MedicationReceiveUsed",
                     "ViewAny:QuestionForm","View:QuestionForm","Create:QuestionForm","Update:QuestionForm","Delete:QuestionForm",
-                    "ViewAny:AppParameter","Update:AppParameter"
+                    "ViewAny:AppParameter","Update:AppParameter",
+                    "ViewAny:Ppra","Approve:Ppra","Reject:Ppra","Delete:Ppra"
                 ]
             },
             {
@@ -199,6 +200,16 @@ class ShieldSeeder extends Seeder
                 "guard_name": "web",
                 "team_id": "019cb7e2-0601-72bc-b53a-67fcdd8e3782",
                 "permissions": []
+            },
+            {
+                "name": "PPRA",
+                "guard_name": "web",
+                "team_id": "019cb7e2-040b-71fd-aecc-8cf5ba16b891",
+                "permissions": [
+                    "ViewAny:Ppra", "Approve:Ppra", "Reject:Ppra", "Delete:Ppra",
+                    "ViewAny:Prescription", "View:Prescription",
+                    "ViewAny:Soap", "View:Soap"
+                ]
             }
         ]';
         $directPermissions = '[]';
