@@ -29,6 +29,7 @@ class ShieldSeeder extends Seeder
                     "ViewAny:OAuthClient","View:OAuthClient","Create:OAuthClient","Update:OAuthClient","Delete:OAuthClient",
                     "ViewAny:User","View:User","Create:User","Update:User","Delete:User",
                     "ViewAny:Role","View:Role","Create:Role","Update:Role","Delete:Role","Sync:Role",
+                    "ViewAny:Patient","View:Patient","Create:Patient","Update:Patient","Delete:Patient",
                     "ViewAny:Education","View:Education","Create:Education","Update:Education","Delete:Education","Print:Education",
                     "ViewAny:InternalReferral","View:InternalReferral","Create:InternalReferral","Update:InternalReferral","Delete:InternalReferral","Print:InternalReferral","Void:InternalReferral","Approve:InternalReferral",
                     "ViewAny:SickLetter","View:SickLetter","Create:SickLetter","Update:SickLetter","Delete:SickLetter","Print:SickLetter","Void:SickLetter","Sign:SickLetter",
@@ -55,8 +56,10 @@ class ShieldSeeder extends Seeder
                     "Manage:Cache",
                     "ViewAny:MedicationReceive","Approve:MedicationReceive","Realize:MedicationReceiveUsed",
                     "ViewAny:QuestionForm","View:QuestionForm","Create:QuestionForm","Update:QuestionForm","Delete:QuestionForm",
+                    "ViewAny:ICD","View:ICD","Create:ICD","Update:ICD","Delete:ICD",
                     "ViewAny:AppParameter","Update:AppParameter",
-                    "ViewAny:Ppra","Approve:Ppra","Reject:Ppra","Delete:Ppra"
+                    "ViewAny:Ppra","Approve:Ppra","Reject:Ppra","Delete:Ppra",
+                    "ViewAny:Coding","AssignICD:Coding","Verify:Coding","Lock:Coding"
                 ]
             },
             {
@@ -64,6 +67,8 @@ class ShieldSeeder extends Seeder
                 "guard_name": "web",
                 "team_id": "019cb7e2-040b-71fd-aecc-8cf5ba16b891",
                 "permissions": [
+                    "ViewAny:Patient","View:Patient",
+                    "ViewAny:Registration","View:Registration",
                     "ViewAny:Education","View:Education","Create:Education","Update:Education","Delete:Education","Print:Education",
                     "ViewAny:InternalReferral","View:InternalReferral","Create:InternalReferral","Update:InternalReferral","Delete:InternalReferral","Print:InternalReferral","Void:InternalReferral",
                     "ViewAny:SickLetter","View:SickLetter","Create:SickLetter","Update:SickLetter","Delete:SickLetter","Print:SickLetter","Void:SickLetter","Sign:SickLetter",
@@ -84,6 +89,8 @@ class ShieldSeeder extends Seeder
                 "guard_name": "web",
                 "team_id": "019cb7e2-040b-71fd-aecc-8cf5ba16b891",
                 "permissions": [
+                    "ViewAny:Patient","View:Patient",
+                    "ViewAny:Registration","View:Registration",
                     "ViewAny:Education","View:Education","Create:Education",
                     "ViewAny:InternalReferral","View:InternalReferral",
                     "ViewAny:SickLetter","View:SickLetter",
@@ -106,6 +113,7 @@ class ShieldSeeder extends Seeder
                 "guard_name": "web",
                 "team_id": "019cb7e2-040b-71fd-aecc-8cf5ba16b891",
                 "permissions": [
+                    "ViewAny:Patient","View:Patient",
                     "ViewAny:Education","View:Education",
                     "ViewAny:Soap","View:Soap",
                     "ViewAny:Prescription","View:Prescription","Review:Prescription","Dispense:Prescription","Verify:Prescription","Print:Prescription",
@@ -135,12 +143,16 @@ class ShieldSeeder extends Seeder
                     "ViewAny:User","View:User","Create:User","Update:User",
                     "ViewAny:Role","View:Role","Create:Role","Update:Role","Sync:Role",
                     "ViewAny:OAuthClient","View:OAuthClient","Create:OAuthClient","Update:OAuthClient",
+                    "ViewAny:Patient","View:Patient",
+                    "ViewAny:Registration","View:Registration",
                     "ViewAny:Invoices","View:Invoices","Create:Invoices","Update:Invoices","Print:Invoices",
                     "ViewAny:Claim","View:Claim","Create:Claim","Update:Claim",
                     "ViewAny:Inventory","View:Inventory","Create:Inventory","Update:Inventory","Approve:Inventory","Transfer:Inventory",
                     "AccessAllDepots:Prescription",
                     "Manage:Cache",
                     "ViewAny:QuestionForm","View:QuestionForm","Create:QuestionForm","Update:QuestionForm","Delete:QuestionForm",
+                    "ViewAny:ICD","View:ICD","Create:ICD","Update:ICD","Delete:ICD",
+                    "ViewAny:Coding","AssignICD:Coding","Verify:Coding","Lock:Coding",
                     "ViewAny:AppParameter","Update:AppParameter"
                 ]
             },
@@ -150,11 +162,23 @@ class ShieldSeeder extends Seeder
                 "team_id": "019cb7e2-040b-71fd-aecc-8cf5ba16b891",
                 "permissions": [
                     "ViewAny:User","View:User",
+                    "ViewAny:Patient","View:Patient","Create:Patient","Update:Patient",
                     "ViewAny:InternalReferral","View:InternalReferral",
                     "ViewAny:Scheduling","View:Scheduling","Create:Scheduling","Update:Scheduling",
                     "ViewAny:KioskQueue","View:KioskQueue","Create:KioskQueue","Update:KioskQueue",
                     "ViewAny:Registration","View:Registration","Create:Registration","Update:Registration","Print:Registration",
                     "ViewAny:Bed","View:Bed"
+                ]
+            },
+            {
+                "name": "MedicalCoder",
+                "guard_name": "web",
+                "team_id": "019cb7e2-040b-71fd-aecc-8cf5ba16b891",
+                "permissions": [
+                    "ViewAny:Soap","View:Soap",
+                    "ViewAny:ICD","View:ICD",
+                    "ViewAny:Coding","AssignICD:Coding","Verify:Coding","Lock:Coding",
+                    "ViewAny:Claim","View:Claim","Create:Claim","Update:Claim"
                 ]
             },
             {
