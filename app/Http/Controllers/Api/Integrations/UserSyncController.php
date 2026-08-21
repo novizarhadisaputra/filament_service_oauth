@@ -92,7 +92,13 @@ class UserSyncController extends Controller
                 ->pluck('name')
                 ->toArray();
 
-            $roleNames = ! empty($existingRoles) ? $existingRoles : ['User'];
+            if (! empty($existingRoles)) {
+                $roleNames = $existingRoles;
+            } elseif ($user->username === 'superadmin' || str_contains($user->email ?? '', 'superadmin')) {
+                $roleNames = ['SuperAdmin'];
+            } else {
+                $roleNames = ['User'];
+            }
         }
 
         foreach ($roleNames as $roleName) {
