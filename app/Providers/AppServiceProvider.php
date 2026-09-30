@@ -42,24 +42,29 @@ class AppServiceProvider extends ServiceProvider
             return response('Authorization View Not Configured', 500);
         });
 
-        // Register Webhook notification trigger on Role/Permission changes
+        // Register Webhook notification trigger on Role/Permission changes (e.g. user-role assignments)
         \Illuminate\Support\Facades\Event::listen([
             \Spatie\Permission\Events\RoleAttached::class,
             \Spatie\Permission\Events\RoleDetached::class,
             \Spatie\Permission\Events\PermissionAttached::class,
             \Spatie\Permission\Events\PermissionDetached::class,
-        ], function () {
-            \App\Support\WebhookHelper::notifyBackendCacheInvalidation();
+        ], function ($event = null) {
+            // Role permission changes are handled by App\Observers\RoleObserver via touch()
+            if ($event && isset($event->model) && $event->model instanceof \App\Models\Role) {
+                return;
+            }
+
+            \Illuminate\Support\Facades\DB::afterCommit(function () {
+                \App\Support\WebhookHelper::notifyBackendCacheInvalidation();
+            });
         });
 
-        \App\Models\Role::saved(function () {
-            \App\Support\WebhookHelper::notifyBackendCacheInvalidation();
-        });
-        \App\Models\Role::deleted(function () {
-            \App\Support\WebhookHelper::notifyBackendCacheInvalidation();
-        });
+        // Role saved/deleted events are handled by App\Observers\RoleObserver
+
         \App\Models\Permission::deleted(function () {
-            \App\Support\WebhookHelper::notifyBackendCacheInvalidation();
+            \Illuminate\Support\Facades\DB::afterCommit(function () {
+                \App\Support\WebhookHelper::notifyBackendCacheInvalidation();
+            });
         });
 
         // Register Filament Shield custom permissions & key composition
