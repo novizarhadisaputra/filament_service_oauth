@@ -9,6 +9,7 @@ use App\Http\Requests\Api\Verify2faRequest;
 use App\Http\Resources\UserResource;
 use App\Models\System;
 use App\Models\User;
+use App\Services\TwoFactorService;
 use App\Traits\ApiResponse;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -42,7 +43,7 @@ class AuthController extends Controller
     /**
      * Login user and create token.
      */
-    public function login(LoginRequest $request): JsonResponse
+    public function login(LoginRequest $request, TwoFactorService $twoFactorService): JsonResponse
     {
         $fieldType = filter_var($request->username, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
 
@@ -52,19 +53,28 @@ class AuthController extends Controller
 
         $user = $request->user();
 
-        // Check for 2FA if system_slug is provided
+        // Check for 2FA if system_slug is provided or user has 2FA enabled
+        $twoFactorRequired = false;
+        $targetSystem = null;
+
         if ($request->filled('system_slug')) {
-            $system = System::where('slug', $request->system_slug)->first();
-            
-            if ($system && $user->hasTwoFactorEnabledFor($system)) {
-                // In a real implementation, we would generate a temporary session/token here
-                // For now, we return a response indicating 2FA is required.
-                return $this->successResponse([
-                    'two_factor_required' => true,
-                    'user_id' => $user->id,
-                    'system_slug' => $system->slug,
-                ], 'Two-factor authentication required', 202);
+            $targetSystem = System::where('slug', $request->system_slug)->first();
+            if ($targetSystem && $user->hasTwoFactorEnabledFor($targetSystem)) {
+                $twoFactorRequired = true;
             }
+        } elseif ($user->hasTwoFactorEnabled()) {
+            $twoFactorRequired = true;
+        }
+
+        if ($twoFactorRequired) {
+            $preAuthToken = $twoFactorService->createPreAuthToken($user);
+
+            return $this->successResponse([
+                'two_factor_required' => true,
+                'user_id' => $user->id,
+                'two_factor_token' => $preAuthToken,
+                'system_slug' => $targetSystem?->slug,
+            ], 'Two-factor authentication required', 202);
         }
 
         $token = $user->createToken('Personal Access Token')->accessToken;
@@ -79,16 +89,28 @@ class AuthController extends Controller
     /**
      * Verify 2FA code and complete login.
      */
-    public function verify2fa(Verify2faRequest $request): JsonResponse
+    public function verify2fa(Verify2faRequest $request, TwoFactorService $twoFactorService): JsonResponse
     {
-        $user = User::findOrFail($request->user_id);
+        $user = null;
 
-        // TODO: Verify TOTP code here using a library like pragmarx/google2fa
-        // For demonstration, we'll assume '123456' is valid if no secret is set yet
-        $isValid = ($request->code === '123456'); 
+        if ($request->filled('two_factor_token')) {
+            $user = $twoFactorService->resolvePreAuthUser($request->two_factor_token);
+        }
 
-        if (!$isValid) {
+        if (! $user && $request->filled('user_id')) {
+            $user = User::find($request->user_id);
+        }
+
+        if (! $user) {
+            return $this->errorResponse('Invalid or expired 2FA session', 422);
+        }
+
+        if (! $twoFactorService->verify($user, $request->code)) {
             return $this->errorResponse('Invalid 2FA code', 422);
+        }
+
+        if ($request->filled('two_factor_token')) {
+            $twoFactorService->consumePreAuthToken($request->two_factor_token);
         }
 
         $token = $user->createToken('Personal Access Token')->accessToken;

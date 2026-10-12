@@ -20,8 +20,9 @@ class Verify2faRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'user_id' => 'required|uuid|exists:users,id',
-            'code' => 'required|string|size:6',
+            'user_id' => 'required_without:two_factor_token|nullable|uuid|exists:users,id',
+            'two_factor_token' => 'required_without:user_id|nullable|string',
+            'code' => 'required|string|min:6|max:20',
             'system_slug' => 'nullable|string|exists:systems,slug',
         ];
     }

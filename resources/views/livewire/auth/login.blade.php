@@ -58,6 +58,7 @@
                 class="absolute -bottom-24 -left-24 w-48 h-48 bg-emerald-50 dark:bg-emerald-900/10 rounded-full blur-3xl">
             </div>
 
+            @if ($step === 'login')
             <form wire:submit="authenticate" class="space-y-6 relative z-10">
                 <div class="space-y-1.5 focus-within:z-20">
                     <label for="username" class="block text-sm font-bold text-slate-700 dark:text-slate-300 ml-1">
@@ -165,6 +166,55 @@
                     </button>
                 </div>
             </form>
+            @else
+            <form wire:submit="verifyTwoFactor" class="space-y-6 relative z-10 animate-fade-in">
+                <div class="text-center mb-4">
+                    <div class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-teal-50 dark:bg-teal-900/30 text-teal-600 dark:text-teal-400 mb-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0V10.5m-2.25 10.5h13.5c.621 0 1.125-.504 1.125-1.125V11.25c0-.621-.504-1.125-1.125-1.125H4.875c-.621 0-1.125.504-1.125 1.125v8.125c0 .621.504 1.125 1.125 1.125Z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 dark:text-white">Verifikasi Dua Langkah (2FA)</h3>
+                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">
+                        Masukkan kode 6-digit dari aplikasi authenticator di ponsel Anda, atau gunakan salah satu Recovery Code.
+                    </p>
+                </div>
+
+                <div class="space-y-1.5 focus-within:z-20">
+                    <label for="twoFactorCode" class="block text-sm font-bold text-slate-700 dark:text-slate-300 ml-1">
+                        Kode Otentikasi / Recovery Code
+                    </label>
+                    <div class="relative flex items-center group">
+                        <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-400 group-focus-within:text-teal-500 transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M7.864 4.243A7.5 7.5 0 0 1 19.5 10.5c0 2.92-.556 5.709-1.568 8.268M5.742 6.364A7.465 7.465 0 0 0 4.5 10.5a7.464 7.464 0 0 1-1.15 3.993m1.989 3.559A11.209 11.209 0 0 0 8.25 10.5a3.75 3.75 0 1 1 7.5 0c0 .527-.021 1.049-.064 1.565M12 10.5a1.5 1.5 0 0 1 1.5 1.5v.008" />
+                            </svg>
+                        </div>
+                        <input wire:model="twoFactorCode" id="twoFactorCode" type="text" autofocus autocomplete="one-time-code"
+                            class="block w-full pl-11 pr-4 py-3.5 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-2xl text-slate-900 dark:text-white placeholder:text-slate-400 focus:ring-4 focus:ring-teal-500/10 focus:border-teal-500 transition-all duration-300 outline-none shadow-sm text-center text-lg tracking-widest font-mono"
+                            placeholder="123456">
+                    </div>
+                    @error('twoFactorCode')
+                        <span class="block px-1 text-xs font-bold text-red-600 dark:text-red-400 mt-1 animate-shake">
+                            {{ $message }}
+                        </span>
+                    @enderror
+                </div>
+
+                <div class="pt-2 space-y-3">
+                    <button type="submit"
+                        class="relative w-full py-4 px-4 bg-teal-600 hover:bg-teal-700 text-white font-bold rounded-2xl shadow-lg active:scale-[0.98] transition-all duration-300 flex justify-center items-center">
+                        <span wire:loading.remove wire:target="verifyTwoFactor">Verifikasi & Masuk</span>
+                        <span wire:loading wire:target="verifyTwoFactor">Memverifikasi...</span>
+                    </button>
+
+                    <button type="button" wire:click="backToLogin"
+                        class="w-full py-2.5 text-xs font-bold text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 uppercase tracking-wider transition-colors">
+                        Kembali ke login
+                    </button>
+                </div>
+            </form>
+            @endif
         </div>
 
         <div class="mt-10 flex flex-col items-center gap-4">

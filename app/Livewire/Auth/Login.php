@@ -3,7 +3,10 @@
 namespace App\Livewire\Auth;
 
 use App\Models\OAuthClient;
+use App\Models\User;
+use App\Services\TwoFactorService;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
@@ -23,6 +26,12 @@ class Login extends Component
     public bool $remember = false;
     
     public ?string $appName = null;
+
+    public string $step = 'login'; // 'login' or '2fa'
+
+    public string $twoFactorCode = '';
+
+    public ?string $pendingUserId = null;
 
     public function mount()
     {
@@ -44,19 +53,66 @@ class Login extends Component
 
     public function authenticate()
     {
-        $this->validate();
+        $this->validate([
+            'username' => 'required|string',
+            'password' => 'required|string',
+        ]);
 
         // Check if the input is an email or username
         $fieldType = filter_var($this->username, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
 
-        if (Auth::attempt([$fieldType => $this->username, 'password' => $this->password], $this->remember)) {
-            session()->regenerate();
+        $user = User::where($fieldType, $this->username)->first();
 
-            // Redirect to intended URL (e.g. Passport authorization) or fallback to dashboard
-            return redirect()->intended(route('filament.admin.pages.dashboard'));
+        if (! $user || ! Hash::check($this->password, $user->password)) {
+            $this->addError('username', trans('auth.failed'));
+            return;
         }
 
-        $this->addError('username', trans('auth.failed'));
+        // Check if user has 2FA enabled
+        if ($user->hasTwoFactorEnabled()) {
+            $this->step = '2fa';
+            $this->pendingUserId = $user->id;
+            $this->password = ''; // Clear sensitive input
+            return;
+        }
+
+        Auth::login($user, $this->remember);
+        session()->regenerate();
+
+        // Redirect to intended URL (e.g. Passport authorization) or fallback to dashboard
+        return redirect()->intended(route('filament.admin.pages.dashboard'));
+    }
+
+    public function verifyTwoFactor(TwoFactorService $twoFactorService)
+    {
+        $this->validate([
+            'twoFactorCode' => 'required|string|min:6|max:20',
+        ]);
+
+        $user = User::find($this->pendingUserId);
+
+        if (! $user) {
+            $this->step = 'login';
+            $this->addError('username', 'Sesi login kedaluwarsa. Silakan masuk kembali.');
+            return;
+        }
+
+        if (! $twoFactorService->verify($user, $this->twoFactorCode)) {
+            $this->addError('twoFactorCode', 'Kode 2FA tidak valid atau sudah kedaluwarsa.');
+            return;
+        }
+
+        Auth::login($user, $this->remember);
+        session()->regenerate();
+
+        return redirect()->intended(route('filament.admin.pages.dashboard'));
+    }
+
+    public function backToLogin()
+    {
+        $this->step = 'login';
+        $this->twoFactorCode = '';
+        $this->pendingUserId = null;
     }
 
     public function render()

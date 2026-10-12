@@ -44,6 +44,8 @@ class UserResource extends JsonResource
             'metadata' => $this->metadata,
             'roles' => $roles,
             'permissions' => $this->getAllPermissions()->pluck('name'),
+            'two_factor_enabled' => $this->hasTwoFactorEnabled(),
+            'two_factor_confirmed_at' => $this->two_factor_confirmed_at?->toIso8601String(),
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ];

@@ -24,13 +24,23 @@ class DatabaseSeeder extends Seeder
         
         // 2. Define users with their specific roles and metadata
         $users = [
+            // Core System Administration
             [
                 'name' => 'Super Administrator',
                 'email' => 'superadmin@tarakan.local',
                 'username' => 'superadmin',
                 'password' => Hash::make('password'),
-                'role' => 'SuperAdmin',
-                'tenant' => '_global',
+                'roles' => ['SuperAdmin'],
+                'tenant' => null,
+                'metadata' => [],
+            ],
+            [
+                'name' => 'Heri Purnomo, Amd.Kom.',
+                'email' => 'okejsb84@gmail.com',
+                'username' => 'Heri.Purnomo',
+                'password' => Hash::make('password'),
+                'roles' => ['SuperAdmin'],
+                'tenant' => null,
                 'metadata' => [],
             ],
             [
@@ -38,85 +48,309 @@ class DatabaseSeeder extends Seeder
                 'email' => 'admin@tarakan.local',
                 'username' => 'admin',
                 'password' => Hash::make('password'),
-                'role' => 'Admin',
+                'roles' => ['Admin'],
                 'tenant' => $simrsTenantId,
                 'metadata' => [],
             ],
             [
-                'name' => 'Dr. Andi Saputra',
-                'email' => 'doctor@tarakan.local',
-                'username' => 'doctor',
+                'name' => 'Ferdy Wijaya, S.Kom',
+                'email' => 'ferdiee045@gmail.com',
+                'username' => 'Ferdy.Wijaya',
                 'password' => Hash::make('password'),
-                'role' => 'Doctor',
+                'roles' => ['Admin'],
                 'tenant' => $simrsTenantId,
-                'metadata' => [
-                    'paramedic_id' => 'MD-00017',
-                ],
+                'metadata' => [],
             ],
+
+            // Clinical Doctors (Role: Doctor)
             [
                 'name' => 'dr. Maria Irawati, Sp.PD-KGH, KIC',
                 'email' => 'drmarias2005@yahoo.com',
                 'username' => 'dr.Maria',
                 'password' => Hash::make('123'),
-                'role' => 'Doctor',
+                'roles' => ['Doctor'],
                 'tenant' => $simrsTenantId,
                 'metadata' => [
                     'paramedic_id' => 'MD-00127',
                 ],
             ],
             [
+                'name' => 'Dr. Andi Saputra',
+                'email' => 'doctor@tarakan.local',
+                'username' => 'doctor',
+                'password' => Hash::make('password'),
+                'roles' => ['Doctor'],
+                'tenant' => $simrsTenantId,
+                'metadata' => [
+                    'paramedic_id' => 'MD-00017',
+                ],
+            ],
+            [
+                'name' => 'dr. Andika Rizki Lubis, Sp.Jp',
+                'email' => 'alubis63@gmail.com',
+                'username' => 'dr.andikaRL',
+                'password' => Hash::make('password'),
+                'roles' => ['Doctor'],
+                'tenant' => $simrsTenantId,
+                'metadata' => [
+                    'paramedic_id' => 'MD-00108',
+                ],
+            ],
+            [
+                'name' => 'dr. Rino Meridian, Sp.B,(K)',
+                'email' => 'rinomeridian1978@gmail.com',
+                'username' => 'dr.Rino',
+                'password' => Hash::make('password'),
+                'roles' => ['Doctor'],
+                'tenant' => $simrsTenantId,
+                'metadata' => [
+                    'paramedic_id' => 'MD-00095',
+                ],
+            ],
+            [
+                'name' => 'dr. Lasma Susi, SpMK',
+                'email' => 'susi.juntak@gmail.com',
+                'username' => 'dr.lasmasusi',
+                'password' => Hash::make('password'),
+                'roles' => ['Doctor', 'PPRA'],
+                'tenant' => $simrsTenantId,
+                'metadata' => [
+                    'paramedic_id' => 'MD-00142',
+                ],
+            ],
+
+            // Nursing Staff (Role: Nurse)
+            [
                 'name' => 'Ners Budi Santoso',
                 'email' => 'nurse@tarakan.local',
                 'username' => 'nurse',
                 'password' => Hash::make('password'),
-                'role' => 'Nurse',
+                'roles' => ['Nurse'],
                 'tenant' => $simrsTenantId,
                 'metadata' => [
                     'employee_number' => 'NRS-001',
                 ],
             ],
             [
+                'name' => 'Ramlawati, S.Kep, Ners',
+                'email' => 'aikoramlawati@yahoo.co.id',
+                'username' => 'Ramlawati',
+                'password' => Hash::make('password'),
+                'roles' => ['Nurse'],
+                'tenant' => $simrsTenantId,
+                'metadata' => [
+                    'employee_number' => 'NRS-002',
+                ],
+            ],
+            [
+                'name' => 'Ainis Solekhah, S.Kep, Ners',
+                'email' => 'ainis.newss@yahoo.com',
+                'username' => 'Ainis.Sole',
+                'password' => Hash::make('password'),
+                'roles' => ['Nurse'],
+                'tenant' => $simrsTenantId,
+                'metadata' => [
+                    'employee_number' => 'NRS-003',
+                ],
+            ],
+
+            // Pharmacy Staff (Role: Pharmacist)
+            [
                 'name' => 'Apoteker Clara',
                 'email' => 'pharmacist@tarakan.local',
                 'username' => 'pharmacist',
                 'password' => Hash::make('password'),
-                'role' => 'Pharmacist',
+                'roles' => ['Pharmacist'],
                 'tenant' => $simrsTenantId,
                 'metadata' => [],
             ],
+            [
+                'name' => 'Aditya Pratama, Amd. Farm',
+                'email' => 'Aditya.Pra@tarakan.local',
+                'username' => 'Aditya.Pra',
+                'password' => Hash::make('password'),
+                'roles' => ['Pharmacist'],
+                'tenant' => $simrsTenantId,
+                'metadata' => [],
+            ],
+
+            // Front Office & Admission (Role: Operator)
             [
                 'name' => 'Registrar Doni',
                 'email' => 'operator@tarakan.local',
                 'username' => 'operator',
                 'password' => Hash::make('password'),
-                'role' => 'Operator',
+                'roles' => ['Operator'],
+                'tenant' => $simrsTenantId,
+                'metadata' => [],
+            ],
+            [
+                'name' => 'Agus Wahyu Sejati',
+                'email' => 'aguswahyusejti14@gmail.com',
+                'username' => 'Agus.WS',
+                'password' => Hash::make('password'),
+                'roles' => ['Operator'],
+                'tenant' => $simrsTenantId,
+                'metadata' => [],
+            ],
+
+            // Medical Coder & Casemix Team (Role: MedicalCoder)
+            [
+                'name' => 'Medical Coder Sarah',
+                'email' => 'coder@tarakan.local',
+                'username' => 'coder',
+                'password' => Hash::make('password'),
+                'roles' => ['MedicalCoder'],
+                'tenant' => $simrsTenantId,
+                'metadata' => [],
+            ],
+            [
+                'name' => 'Ukfia Anggraini, S.Kom',
+                'email' => 'ukfia.a@tarakan.local',
+                'username' => 'Ukfia.A',
+                'password' => Hash::make('password'),
+                'roles' => ['MedicalCoder'],
+                'tenant' => $simrsTenantId,
+                'metadata' => ['person_id' => '2445'],
+            ],
+            [
+                'name' => 'Pitra Wahyuni, AMd.RM',
+                'email' => 'pitra.wahyu@tarakan.local',
+                'username' => 'Pitra.Wahyu',
+                'password' => Hash::make('password'),
+                'roles' => ['MedicalCoder'],
+                'tenant' => $simrsTenantId,
+                'metadata' => ['person_id' => '807'],
+            ],
+            [
+                'name' => 'Remista Situmeang, A.Md. RMIK',
+                'email' => 'remista.s@tarakan.local',
+                'username' => 'Remista.S',
+                'password' => Hash::make('password'),
+                'roles' => ['MedicalCoder'],
+                'tenant' => $simrsTenantId,
+                'metadata' => ['person_id' => '843'],
+            ],
+            [
+                'name' => 'Yuni Marugun, A.Md Rmik',
+                'email' => 'yuni.ma@tarakan.local',
+                'username' => 'Yuni.MA',
+                'password' => Hash::make('password'),
+                'roles' => ['MedicalCoder'],
+                'tenant' => $simrsTenantId,
+                'metadata' => ['person_id' => '1120'],
+            ],
+            [
+                'name' => 'Wulan Sari Marasito P, AMd.RM',
+                'email' => 'wulan.sari@tarakan.local',
+                'username' => 'Wulan.Sari',
+                'password' => Hash::make('password'),
+                'roles' => ['MedicalCoder'],
+                'tenant' => $simrsTenantId,
+                'metadata' => ['person_id' => '1092'],
+            ],
+            [
+                'name' => 'Yohana Dwi Astuti, AMd.RM',
+                'email' => 'yohana.dwi@tarakan.local',
+                'username' => 'Yohana.Dwi',
+                'password' => Hash::make('password'),
+                'roles' => ['MedicalCoder'],
+                'tenant' => $simrsTenantId,
+                'metadata' => ['person_id' => '1109'],
+            ],
+            [
+                'name' => 'Eka Amalia Wulandari, AMd.RM',
+                'email' => 'ekaamalia0591@gmail.com',
+                'username' => 'Eka.Amalia',
+                'password' => Hash::make('password'),
+                'roles' => ['MedicalCoder'],
+                'tenant' => $simrsTenantId,
+                'metadata' => ['person_id' => '405'],
+            ],
+            [
+                'name' => 'Juwita Sari, AMd.RM',
+                'email' => 'juwita.sar@tarakan.local',
+                'username' => 'Juwita.Sar',
+                'password' => Hash::make('password'),
+                'roles' => ['MedicalCoder'],
+                'tenant' => $simrsTenantId,
+                'metadata' => ['person_id' => '592'],
+            ],
+            [
+                'name' => 'Nilasari, SE',
+                'email' => 'nilasari@tarakan.local',
+                'username' => 'Nilasari',
+                'password' => Hash::make('password'),
+                'roles' => ['MedicalCoder'],
+                'tenant' => $simrsTenantId,
+                'metadata' => ['person_id' => '751'],
+            ],
+            [
+                'name' => 'Uji Sektiawan, ST(Kom)',
+                'email' => 'akusingpalinganyar@gmail.com',
+                'username' => 'Uji.S',
+                'password' => Hash::make('password'),
+                'roles' => ['MedicalCoder'],
+                'tenant' => $simrsTenantId,
+                'metadata' => ['person_id' => '1052'],
+            ],
+
+            // Management, HR & Billing
+            [
+                'name' => 'Direktur Pelayanan Medis',
+                'email' => 'management@tarakan.local',
+                'username' => 'management',
+                'password' => Hash::make('password'),
+                'roles' => ['Management'],
+                'tenant' => $simrsTenantId,
+                'metadata' => [],
+            ],
+            [
+                'name' => 'Staf SDM Jessica',
+                'email' => 'hr@tarakan.local',
+                'username' => 'hr',
+                'password' => Hash::make('password'),
+                'roles' => ['HR'],
+                'tenant' => $simrsTenantId,
+                'metadata' => [],
+            ],
+            [
+                'name' => 'Kasir Keuangan Kevin',
+                'email' => 'billing@tarakan.local',
+                'username' => 'billing',
+                'password' => Hash::make('password'),
+                'roles' => ['Billing'],
                 'tenant' => $simrsTenantId,
                 'metadata' => [],
             ],
         ];
 
         foreach ($users as $userData) {
-            $roleName = $userData['role'];
+            $roles = (array) $userData['roles'];
             $tenantId = $userData['tenant'];
-            unset($userData['role'], $userData['tenant']);
+            unset($userData['roles'], $userData['tenant']);
 
-            $user = User::updateOrCreate(
-                ['email' => $userData['email']],
-                $userData
-            );
+            $user = User::where('email', $userData['email'])
+                ->orWhere('username', $userData['username'])
+                ->first();
 
-            // Attach user to SIMRS tenant (system_user table)
-            if ($tenantId !== '_global') {
+            if ($user) {
+                $user->update($userData);
+            } else {
+                $user = User::create($userData);
+            }
+
+            // Attach user to systems (system_user table)
+            if ($tenantId !== null) {
                 $user->systems()->syncWithoutDetaching([$simrsTenantId]);
             } else {
                 // Global users can access all systems
                 $user->systems()->syncWithoutDetaching(System::pluck('id')->toArray());
             }
 
-            // Assign role per tenant/context
-            $contextId = $tenantId === '_global' ? null : $tenantId;
-            setPermissionsTeamId($contextId);
-            $user->syncRoles([$roleName]);
+            // Assign role per tenant/context (null for global roles like SuperAdmin)
+            setPermissionsTeamId($tenantId);
+            $user->syncRoles($roles);
         }
     }
 }

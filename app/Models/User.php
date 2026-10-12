@@ -49,6 +49,9 @@ class User extends Authenticatable implements FilamentUser, HasTenants
         'username',
         'password',
         'metadata',
+        'two_factor_secret',
+        'two_factor_recovery_codes',
+        'two_factor_confirmed_at',
     ];
 
     /**
@@ -74,6 +77,9 @@ class User extends Authenticatable implements FilamentUser, HasTenants
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
             'metadata' => 'json',
+            'two_factor_secret' => 'encrypted',
+            'two_factor_recovery_codes' => 'encrypted:array',
+            'two_factor_confirmed_at' => 'datetime',
         ];
     }
 
@@ -101,11 +107,19 @@ class User extends Authenticatable implements FilamentUser, HasTenants
 
     public function canAccessTenant(Model $tenant): bool
     {
+        if ($this->hasRole('SuperAdmin') || $this->hasRole(config('filament-shield.super_admin.name', 'super_admin'))) {
+            return true;
+        }
+
         return $this->systems()->where('systems.id', $tenant->id)->exists();
     }
 
     public function getTenants(Panel $panel): Collection
     {
+        if ($this->hasRole('SuperAdmin') || $this->hasRole(config('filament-shield.super_admin.name', 'super_admin'))) {
+            return System::all();
+        }
+
         return $this->systems;
     }
 
@@ -117,17 +131,25 @@ class User extends Authenticatable implements FilamentUser, HasTenants
     }
 
     /**
+     * Check if user has globally enabled and confirmed 2FA.
+     */
+    public function hasTwoFactorEnabled(): bool
+    {
+        return ! empty($this->two_factor_secret) && ! empty($this->two_factor_confirmed_at);
+    }
+
+    /**
      * Check if the user has 2FA enabled for a specific system.
      */
     public function hasTwoFactorEnabledFor(System $system): bool
     {
         if ($system->requires_2fa) {
-            return true;
+            return $this->hasTwoFactorEnabled();
         }
 
         $systemUser = $this->systems()->where('systems.id', $system->id)->first();
 
-        return $systemUser?->pivot?->two_factor_enabled ?? false;
+        return (bool) ($systemUser?->pivot?->two_factor_enabled ?? false) && $this->hasTwoFactorEnabled();
     }
 
     /**
