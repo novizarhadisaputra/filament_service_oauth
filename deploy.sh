@@ -81,13 +81,18 @@ composer install --no-dev --optimize-autoloader --no-interaction --prefer-dist
 log_success "Dependensi Composer siap"
 
 # 4. Migrasi Database (Non-Destructive)
-log_info "=== [4/6] Menjalankan Database Migrations ==="
+log_info "=== [4/7] Menjalankan Database Migrations ==="
 # PERINGATAN KERAS: JANGAN PERNAH MENJALANKAN migrate:fresh PADA DATABASE STAGING / PRODUKSI
 php artisan migrate --force
 log_success "Migrasi database selesai dijalankan tanpa menghapus data yang ada"
 
-# 5. Reset & Pemanasan Cache Framework
-log_info "=== [5/6] Mengoptimalkan Cache Framework Laravel OAuth ==="
+# 5. Sinkronisasi Roles, Permissions & OAuth Clients (Database Seeding)
+log_info "=== [5/7] Menjalankan Database Seeder (Roles, Permissions & OAuth Clients) ==="
+php artisan db:seed --force
+log_success "Roles, permissions, OAuth clients, dan akun staf berhasil disinkronkan"
+
+# 6. Reset & Pemanasan Cache Framework
+log_info "=== [6/7] Mengoptimalkan Cache Framework Laravel OAuth ==="
 php artisan permission:cache-reset || log_warn "Permission cache reset dilewati"
 php artisan optimize:clear
 php artisan config:cache
@@ -95,8 +100,8 @@ php artisan route:cache
 php artisan view:cache
 log_success "Konfigurasi, routing, dan view OAuth berhasil di-cache"
 
-# 6. Restart Service & Health Check
-log_info "=== [6/6] Me-restart Layanan Octane OAuth & Health Check ==="
+# 7. Restart Service & Health Check
+log_info "=== [7/7] Me-restart Layanan Octane OAuth & Health Check ==="
 if command -v systemctl >/dev/null 2>&1; then
     run_as_root systemctl restart octane-oauth
     sleep 2

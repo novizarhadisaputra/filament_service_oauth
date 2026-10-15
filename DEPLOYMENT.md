@@ -55,7 +55,14 @@ composer install --no-dev --optimize-autoloader --no-interaction --prefer-dist
 php artisan migrate --force
 ```
 
-### Langkah 5: Reset & Optimasi Cache Framework Laravel OAuth
+### Langkah 5: Sinkronisasi Roles, Permissions & OAuth Clients (Database Seeding)
+Jalankan seeder untuk memastikan permission Filament Shield, OAuth Clients (SIMRS frontend & backend), serta akun pengguna staf rumah sakit terpasang dan diperbarui:
+```bash
+php artisan db:seed --force
+```
+*Catatan: Seeder menggunakan `firstOrCreate` / `updateOrCreate` sehingga aman dijalankan berulang kali tanpa duplikasi data.*
+
+### Langkah 6: Reset & Optimasi Cache Framework Laravel OAuth
 ```bash
 # Reset cache permission & roles
 php artisan permission:cache-reset
@@ -69,7 +76,7 @@ php artisan route:cache
 php artisan view:cache
 ```
 
-### Langkah 6: Me-restart Layanan Laravel Octane OAuth
+### Langkah 7: Me-restart Layanan Laravel Octane OAuth
 ```bash
 sudo systemctl restart octane-oauth
 ```
@@ -79,7 +86,7 @@ Pastikan status service aktif dan berjalan normal:
 systemctl status octane-oauth --no-pager
 ```
 
-### Langkah 7: Verifikasi Kesehatan Endpoint (Health Check)
+### Langkah 8: Verifikasi Kesehatan Endpoint (Health Check)
 ```bash
 # Uji endpoint login API OAuth (respons normal: 422 jika tanpa payload, 200 jika kredensial valid)
 curl -s -o /dev/null -w "OAuth Service Status: %{http_code}\n" \
