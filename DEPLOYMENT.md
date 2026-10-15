@@ -98,23 +98,7 @@ curl -s -o /dev/null -w "OAuth Service Status: %{http_code}\n" \
 
 ---
 
-## 4. Prosedur Deployment Cepat (Automated Script)
-
-Script otomasi telah disediakan di direktori aplikasi:
-
-```bash
-cd /var/www/oauth
-./deploy.sh
-```
-
-Atau dijalankan dengan sudo:
-```bash
-echo 'n0v1@26' | sudo -S /var/www/oauth/deploy.sh
-```
-
----
-
-## 5. Troubleshooting & Rollback
+## 4. Troubleshooting & Rollback
 
 ### A. Melihat Log Error Layanan Octane OAuth
 ```bash
