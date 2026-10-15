@@ -44,15 +44,6 @@ class DatabaseSeeder extends Seeder
                 'metadata' => [],
             ],
             [
-                'name' => 'System Administrator',
-                'email' => 'admin@tarakan.local',
-                'username' => 'admin',
-                'password' => Hash::make('password'),
-                'roles' => ['Admin'],
-                'tenant' => $simrsTenantId,
-                'metadata' => [],
-            ],
-            [
                 'name' => 'Ferdy Wijaya, S.Kom',
                 'email' => 'ferdiee045@gmail.com',
                 'username' => 'Ferdy.Wijaya',
@@ -176,15 +167,6 @@ class DatabaseSeeder extends Seeder
 
             // Front Office & Admission (Role: Operator)
             [
-                'name' => 'Registrar Doni',
-                'email' => 'operator@tarakan.local',
-                'username' => 'operator',
-                'password' => Hash::make('password'),
-                'roles' => ['Operator'],
-                'tenant' => $simrsTenantId,
-                'metadata' => [],
-            ],
-            [
                 'name' => 'Agus Wahyu Sejati',
                 'email' => 'aguswahyusejti14@gmail.com',
                 'username' => 'Agus.WS',
@@ -195,15 +177,6 @@ class DatabaseSeeder extends Seeder
             ],
 
             // Medical Coder & Casemix Team (Role: MedicalCoder)
-            [
-                'name' => 'Medical Coder Sarah',
-                'email' => 'coder@tarakan.local',
-                'username' => 'coder',
-                'password' => Hash::make('password'),
-                'roles' => ['MedicalCoder'],
-                'tenant' => $simrsTenantId,
-                'metadata' => [],
-            ],
             [
                 'name' => 'Ukfia Anggraini, S.Kom',
                 'email' => 'ukfia.a@tarakan.local',
@@ -315,11 +288,20 @@ class DatabaseSeeder extends Seeder
                 'metadata' => [],
             ],
             [
-                'name' => 'Kasir Keuangan Kevin',
-                'email' => 'billing@tarakan.local',
-                'username' => 'billing',
+                'name' => 'Anton',
+                'email' => 'anton@tarakan.local',
+                'username' => 'Anton',
                 'password' => Hash::make('password'),
                 'roles' => ['Billing'],
+                'tenant' => $simrsTenantId,
+                'metadata' => [],
+            ],
+            [
+                'name' => 'Ahmad Firdaus, A.Md.G',
+                'email' => 'ahmad.fird@tarakan.local',
+                'username' => 'Ahmad.Fird',
+                'password' => Hash::make('password'),
+                'roles' => ['Dietitian'],
                 'tenant' => $simrsTenantId,
                 'metadata' => [],
             ],
