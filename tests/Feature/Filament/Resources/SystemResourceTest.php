@@ -7,6 +7,7 @@ use App\Models\Role;
 use App\Models\System;
 use App\Models\User;
 use Filament\Facades\Filament;
+use Spatie\Permission\PermissionRegistrar;
 use function Pest\Laravel\actingAs;
 
 beforeEach(function () {

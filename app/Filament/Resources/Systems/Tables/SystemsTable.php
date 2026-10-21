@@ -2,6 +2,8 @@
 
 namespace App\Filament\Resources\Systems\Tables;
 
+use App\Models\System;
+use Filament\Actions\Action;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
@@ -21,6 +23,16 @@ class SystemsTable
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
+            ])
+            ->actions([
+                Action::make('activate')
+                    ->action(fn (System $record) => $record->update(['is_active' => true]))
+                    ->color('success')
+                    ->visible(fn (System $record) => ! $record->is_active && auth()->user()->can('activate', $record)),
+                Action::make('deactivate')
+                    ->action(fn (System $record) => $record->update(['is_active' => false]))
+                    ->color('danger')
+                    ->visible(fn (System $record) => $record->is_active && auth()->user()->can('deactivate', $record)),
             ]);
     }
 }

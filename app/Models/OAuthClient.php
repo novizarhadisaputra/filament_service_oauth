@@ -107,6 +107,7 @@ class OAuthClient extends PassportClient
         'owner_id',
         'owner_type',
         'name',
+        'secret',
         'client_secret',
         'encrypted_secret',
         'provider',

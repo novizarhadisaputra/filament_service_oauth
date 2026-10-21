@@ -7,6 +7,7 @@ use App\Models\Permission;
 use App\Models\System;
 use App\Models\User;
 use Filament\Facades\Filament;
+use Spatie\Permission\PermissionRegistrar;
 use function Pest\Laravel\actingAs;
 
 beforeEach(function () {
@@ -118,7 +119,7 @@ test('can regenerate oauth client secret', function () {
         'client_secret' => 'old-secret',
     ]);
 
-    Livewire::test(ListOAuthClients::class, ['tenant' => $this->system])
+    Livewire::test(ListOAuthClients::class, ['tenant' => $this->system->id])
         ->callTableAction('regenerateSecret', $client)
         ->assertHasNoTableActionErrors();
 
