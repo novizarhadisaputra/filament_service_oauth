@@ -701,7 +701,11 @@ class ShieldSeeder extends Seeder
             "ViewAny:ClinicalAnalytics",
             "View:ClinicalAnalytics",
             "Approve:InternalReferral",
-            "Create:ClinicalNote"
+            "Create:ClinicalNote",
+            "ViewAny:SatuSehat",
+            "View:SatuSehat",
+            "Sync:SatuSehat",
+            "Retry:SatuSehat"
         ]
     },
     {
@@ -806,7 +810,9 @@ class ShieldSeeder extends Seeder
             "View:HealthScreening",
             "Create:HealthScreening",
             "Update:HealthScreening",
-            "Create:ClinicalNote"
+            "Create:ClinicalNote",
+            "ViewAny:SatuSehat",
+            "View:SatuSehat"
         ]
     },
     {
@@ -988,7 +994,9 @@ class ShieldSeeder extends Seeder
             "ViewAll:Registration",
             "ViewAny:SopDocument",
             "View:SopDocument",
-            "Download:SopDocument"
+            "Download:SopDocument",
+            "ViewAny:SatuSehat",
+            "View:SatuSehat"
         ]
     },
     {
