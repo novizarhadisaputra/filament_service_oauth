@@ -14,11 +14,11 @@ class ShieldSeeder extends Seeder
         app()[PermissionRegistrar::class]->forgetCachedPermissions();
 
         $tenants = '[{"id":"019cb7e2-040b-71fd-aecc-8cf5ba16b891","name":"SIMRS","slug":"simrs","system_code":"SYS-NP3FBQXQ","description":null,"is_active":true,"created_at":"2026-03-04T08:06:08.000000Z","updated_at":"2026-03-04T08:06:08.000000Z"},{"id":"019cb7e2-0508-73a1-84b6-a4f1e0118970","name":"E-Kinerja","slug":"e-kinerja","system_code":"SYS-L21D7KPE","description":null,"is_active":true,"created_at":"2026-03-04T08:06:08.000000Z","updated_at":"2026-03-04T08:06:08.000000Z"},{"id":"019cb7e2-0601-72bc-b53a-67fcdd8e3782","name":"Absensi Online","slug":"absensi","system_code":"SYS-CU1SCYC5","description":null,"is_active":true,"created_at":"2026-03-04T08:06:09.000000Z","updated_at":"2026-03-04T08:06:09.000000Z"}]';
-        
+
         // Seed users with updated PascalCase roles
         $users = '[{"id":"019cb7e2-02ee-7163-a70d-657bab8ac83b","name":"Test User","email":"test@example.com","email_verified_at":"2026-03-04T08:06:08.000000Z","created_at":"2026-03-04T08:06:08.000000Z","updated_at":"2026-03-04T08:06:08.000000Z","username":"test@example.com","password":"$2y$12$9VwN41imbu\\/iHdp6MwPPCu7\\/RjLPMjYicVSF9FnwHBluUV0RxRg\\/C","tenant_roles":{"_global":["SuperAdmin"]},"tenant_permissions":[]},{"id":"019cb7e2-03f7-7065-a656-c4a736e446b1","name":"Global Super Admin","email":"super-admin@health.id","email_verified_at":null,"created_at":"2026-03-04T08:06:08.000000Z","updated_at":"2026-03-04T08:06:08.000000Z","username":null,"password":"$2y$12$d55YMLsGZXzFXWCbElDgt.2diPk4d3chD5KiS31AswzixqzZqW15O","tenant_roles":{"_global":["SuperAdmin"]},"tenant_permissions":[]},{"id":"019cb7e2-04f7-708c-a7d8-cac9b8a6674e","name":"Admin SIMRS","email":"admin-simrs@health.id","email_verified_at":null,"created_at":"2026-03-04T08:06:08.000000Z","updated_at":"2026-03-04T08:06:08.000000Z","username":null,"password":"$2y$12$TUCXyoN4kQlkRHTk5XNCteE5xUAMf0k4Bzyhweq5d\\/pBAX.W9FXny","tenant_roles":{"019cb7e2-040b-71fd-aecc-8cf5ba16b891":["Admin"]},"tenant_permissions":[]},{"id":"019cb7e2-05f2-7388-a4bc-683168bfa7b4","name":"Admin E-Kinerja","email":"admin-e-kinerja@health.id","email_verified_at":null,"created_at":"2026-03-04T08:06:09.000000Z","updated_at":"2026-03-04T08:06:09.000000Z","username":null,"password":"$2y$12$eci2V072sigYVsFZ0yyNwuKjbXUhL8KB.tXqalYfbpIG7zOEOlscS","tenant_roles":{"019cb7e2-0508-73a1-84b6-a4f1e0118970":["Admin"]},"tenant_permissions":[]},{"id":"019cb7e2-06ec-703c-809c-c377d71406ce","name":"Admin Absensi Online","email":"admin-absensi@health.id","email_verified_at":null,"created_at":"2026-03-04T08:06:09.000000Z","updated_at":"2026-03-04T08:06:09.000000Z","username":null,"password":"$2y$12$5Fzd6XVRcRgce59l64SBYuD1y8E5d5ZrZ.QMqb5rUQ4zYgdfnbg2S","tenant_roles":{"019cb7e2-0601-72bc-b53a-67fcdd8e3782":["Admin"]},"tenant_permissions":[]},{"id":"019cb7e2-07ec-703c-809c-c377d71406ce","name":"Pharmacy User","email":"pharmacy@health.id","email_verified_at":null,"created_at":"2026-03-04T08:06:09.000000Z","updated_at":"2026-03-04T08:06:09.000000Z","username":null,"password":"$2y$12$9VwN41imbu\\/iHdp6MwPPCu7\\/RjLPMjYicVSF9FnwHBluUV0RxRg\\/C","tenant_roles":{"019cb7e2-040b-71fd-aecc-8cf5ba16b891":["Pharmacist"]},"tenant_permissions":[]}]';
         $userTenantPivot = '[]';
-        
+
         // Seed roles with permissions (matching backend RolesAndPermissionsSeeder exactly)
         $rolesWithPermissions = '[
     {
@@ -466,6 +466,8 @@ class ShieldSeeder extends Seeder
             "View:Registration",
             "ViewAny:Bed",
             "View:Bed",
+            "ViewAny:VitalSign",
+            "ViewAny:Ppra",
             "ViewAny:Invoices",
             "View:Invoices",
             "Create:Invoices",
@@ -599,6 +601,7 @@ class ShieldSeeder extends Seeder
             "Sign:SickLetter",
             "ViewAny:Soap",
             "View:Soap",
+            "Create:Soap",
             "Update:Soap",
             "Delete:Soap",
             "Print:Soap",
@@ -613,6 +616,7 @@ class ShieldSeeder extends Seeder
             "Update:Prescription",
             "Print:Prescription",
             "Void:Prescription",
+            "ViewAny:Ppra",
             "ViewAny:ExamOrder",
             "View:ExamOrder",
             "Create:ExamOrder",
@@ -705,6 +709,7 @@ class ShieldSeeder extends Seeder
             "View:SickLetter",
             "ViewAny:Soap",
             "View:Soap",
+            "Create:Soap",
             "ViewAny:VitalSign",
             "View:VitalSign",
             "Create:VitalSign",
@@ -803,6 +808,7 @@ class ShieldSeeder extends Seeder
             "View:Education",
             "ViewAny:Soap",
             "View:Soap",
+            "ViewAny:VitalSign",
             "ViewAny:Prescription",
             "View:Prescription",
             "Print:Prescription",
@@ -925,6 +931,7 @@ class ShieldSeeder extends Seeder
         "permissions": [
             "ViewAny:Soap",
             "View:Soap",
+            "ViewAny:VitalSign",
             "ViewAny:Prescription",
             "View:Prescription",
             "ViewAny:Ppra",
