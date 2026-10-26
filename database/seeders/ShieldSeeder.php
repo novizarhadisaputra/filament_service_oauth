@@ -440,7 +440,11 @@ class ShieldSeeder extends Seeder
             "Update:Payroll",
             "Process:Payroll",
             "Print:Payroll",
-            "Approve:Payroll"
+            "Approve:Payroll",
+            "View:AppParameter",
+            "Create:AppParameter",
+            "Delete:AppParameter",
+            "Create:ClinicalNote"
         ]
     },
     {
@@ -570,7 +574,10 @@ class ShieldSeeder extends Seeder
             "ViewAny:Employee",
             "View:Employee",
             "Create:Employee",
-            "Update:Employee"
+            "Update:Employee",
+            "View:AppParameter",
+            "Create:AppParameter",
+            "Delete:AppParameter"
         ]
     },
     {
@@ -692,7 +699,9 @@ class ShieldSeeder extends Seeder
             "Create:HealthScreening",
             "Update:HealthScreening",
             "ViewAny:ClinicalAnalytics",
-            "View:ClinicalAnalytics"
+            "View:ClinicalAnalytics",
+            "Approve:InternalReferral",
+            "Create:ClinicalNote"
         ]
     },
     {
@@ -796,7 +805,8 @@ class ShieldSeeder extends Seeder
             "ViewAny:HealthScreening",
             "View:HealthScreening",
             "Create:HealthScreening",
-            "Update:HealthScreening"
+            "Update:HealthScreening",
+            "Create:ClinicalNote"
         ]
     },
     {
@@ -1118,7 +1128,11 @@ class ShieldSeeder extends Seeder
         "name": "Admin",
         "guard_name": "web",
         "team_id": "019cb7e2-0508-73a1-84b6-a4f1e0118970",
-        "permissions": []
+        "permissions": [
+            "View:AppParameter",
+            "Create:AppParameter",
+            "Delete:AppParameter"
+        ]
     },
     {
         "name": "Operator",
@@ -1136,7 +1150,11 @@ class ShieldSeeder extends Seeder
         "name": "Admin",
         "guard_name": "web",
         "team_id": "019cb7e2-0601-72bc-b53a-67fcdd8e3782",
-        "permissions": []
+        "permissions": [
+            "View:AppParameter",
+            "Create:AppParameter",
+            "Delete:AppParameter"
+        ]
     },
     {
         "name": "Operator",
