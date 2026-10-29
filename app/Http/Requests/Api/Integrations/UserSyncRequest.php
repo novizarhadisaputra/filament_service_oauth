@@ -4,10 +4,16 @@ namespace App\Http\Requests\Api\Integrations;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * Class UserSyncRequest
+ *
+ * User Sync Request.
+ */
 class UserSyncRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
+     * @return bool
      */
     public function authorize(): bool
     {

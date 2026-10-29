@@ -6,9 +6,17 @@ use App\Http\Resources\UserResource;
 use App\Models\User;
 use Tests\TestCase;
 
+/**
+ * Class UserResourceTest
+ *
+ * User Resource Test.
+ */
 class UserResourceTest extends TestCase
 {
 
+    /**
+     * Test that Test User Resource Includes Metadata.
+     */
     public function test_user_resource_includes_metadata()
     {
         $user = User::factory()->create([

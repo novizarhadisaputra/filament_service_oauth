@@ -15,6 +15,11 @@ use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 
+/**
+ * Class UserResource
+ *
+ * User Resource.
+ */
 class UserResource extends Resource
 {
     protected static ?string $model = User::class;
@@ -33,16 +38,33 @@ class UserResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedUserGroup;
 
+    /**
+     * Execute Form operation.
+     *
+     * @param Schema $schema
+     * @return Schema
+     */
     public static function form(Schema $schema): Schema
     {
         return UserForm::configure($schema);
     }
 
+    /**
+     * Execute Table operation.
+     *
+     * @param Table $table
+     * @return Table
+     */
     public static function table(Table $table): Table
     {
         return UsersTable::configure($table);
     }
 
+    /**
+     * Execute Get Eloquent Query operation.
+     *
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
     public static function getEloquentQuery(): \Illuminate\Database\Eloquent\Builder
     {
         $query = parent::getEloquentQuery();
@@ -54,6 +76,11 @@ class UserResource extends Resource
         return $query;
     }
 
+    /**
+     * Execute Get Relations operation.
+     *
+     * @return array
+     */
     public static function getRelations(): array
     {
         return [
@@ -61,6 +88,12 @@ class UserResource extends Resource
         ];
     }
 
+    /**
+     * Execute Get Record Sub Navigation operation.
+     *
+     * @param Page $page
+     * @return array
+     */
     public static function getRecordSubNavigation(Page $page): array
     {
         return $page->generateNavigationItems([
@@ -68,6 +101,11 @@ class UserResource extends Resource
         ]);
     }
 
+    /**
+     * Execute Get Pages operation.
+     *
+     * @return array
+     */
     public static function getPages(): array
     {
         return [

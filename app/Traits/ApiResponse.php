@@ -4,12 +4,20 @@ namespace App\Traits;
 
 use Illuminate\Http\JsonResponse;
 
+/**
+ * Trait ApiResponse
+ *
+ * Api Response.
+ */
 trait ApiResponse
 {
     /**
      * Send a success response.
      *
      * @param  mixed  $data
+     * @param string $message
+     * @param int $code
+     * @return JsonResponse
      */
     protected function successResponse($data, string $message = 'Success', int $code = 200): JsonResponse
     {
@@ -24,6 +32,9 @@ trait ApiResponse
      * Send an error response.
      *
      * @param  mixed  $errors
+     * @param string $message
+     * @param int $code
+     * @return JsonResponse
      */
     protected function errorResponse(string $message, int $code = 400, $errors = null): JsonResponse
     {
@@ -43,6 +54,8 @@ trait ApiResponse
      * Send a validation error response.
      *
      * @param  mixed  $errors
+     * @param string $message
+     * @return JsonResponse
      */
     protected function validationErrorResponse($errors, string $message = 'Validation failed'): JsonResponse
     {

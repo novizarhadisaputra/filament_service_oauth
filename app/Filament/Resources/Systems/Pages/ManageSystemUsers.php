@@ -12,6 +12,11 @@ use Filament\Actions\ViewAction;
 use Filament\Resources\Pages\ManageRelatedRecords;
 use Filament\Tables\Table;
 
+/**
+ * Class ManageSystemUsers
+ *
+ * Manage System Users.
+ */
 class ManageSystemUsers extends ManageRelatedRecords
 {
     protected static string $resource = SystemResource::class;
@@ -20,6 +25,12 @@ class ManageSystemUsers extends ManageRelatedRecords
 
     protected static ?string $relatedResource = UserResource::class;
 
+    /**
+     * Execute Table operation.
+     *
+     * @param Table $table
+     * @return Table
+     */
     public function table(Table $table): Table
     {
         return $table
@@ -33,6 +44,11 @@ class ManageSystemUsers extends ManageRelatedRecords
             ]);
     }
 
+    /**
+     * Execute Get Breadcrumbs operation.
+     *
+     * @return array
+     */
     public function getBreadcrumbs(): array
     {
         $resource = static::getResource();

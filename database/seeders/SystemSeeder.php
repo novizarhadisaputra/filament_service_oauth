@@ -4,6 +4,11 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 
+/**
+ * Class SystemSeeder
+ *
+ * System Seeder.
+ */
 class SystemSeeder extends Seeder
 {
     /**

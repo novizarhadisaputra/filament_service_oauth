@@ -17,6 +17,11 @@ use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 
+/**
+ * Class SystemResource
+ *
+ * System Resource.
+ */
 class SystemResource extends Resource
 {
     protected static ?string $model = System::class;
@@ -27,16 +32,33 @@ class SystemResource extends Resource
 
     protected static ?int $navigationSort = 1;
 
+    /**
+     * Execute Form operation.
+     *
+     * @param Schema $schema
+     * @return Schema
+     */
     public static function form(Schema $schema): Schema
     {
         return SystemForm::configure($schema);
     }
 
+    /**
+     * Execute Table operation.
+     *
+     * @param Table $table
+     * @return Table
+     */
     public static function table(Table $table): Table
     {
         return SystemsTable::configure($table);
     }
 
+    /**
+     * Execute Get Relations operation.
+     *
+     * @return array
+     */
     public static function getRelations(): array
     {
         return [
@@ -44,6 +66,12 @@ class SystemResource extends Resource
         ];
     }
 
+    /**
+     * Execute Get Record Sub Navigation operation.
+     *
+     * @param Page $page
+     * @return array
+     */
     public static function getRecordSubNavigation(Page $page): array
     {
         return $page->generateNavigationItems([
@@ -53,6 +81,11 @@ class SystemResource extends Resource
         ]);
     }
 
+    /**
+     * Execute Get Pages operation.
+     *
+     * @return array
+     */
     public static function getPages(): array
     {
         return [

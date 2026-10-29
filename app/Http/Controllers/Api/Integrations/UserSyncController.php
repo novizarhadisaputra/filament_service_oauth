@@ -13,12 +13,19 @@ use App\Traits\ApiResponse;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Hash;
 
+/**
+ * Class UserSyncController
+ *
+ * User Sync Controller.
+ */
 class UserSyncController extends Controller
 {
     use ApiResponse;
 
     /**
      * Sync user data from trusted internal source.
+     * @param UserSyncRequest $request
+     * @return JsonResponse
      */
     public function sync(UserSyncRequest $request): JsonResponse
     {

@@ -7,12 +7,18 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\DB;
 
+/**
+ * Class UserResource
+ *
+ * User Resource.
+ */
 class UserResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
      *
      * @return array<string, mixed>
+     * @param Request $request
      */
     public function toArray(Request $request): array
     {

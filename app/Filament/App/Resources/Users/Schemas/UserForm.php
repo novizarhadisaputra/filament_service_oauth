@@ -12,8 +12,19 @@ use Filament\Schemas\Components\Grid;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 
+/**
+ * Class UserForm
+ *
+ * User Form.
+ */
 class UserForm
 {
+    /**
+     * Execute Configure operation.
+     *
+     * @param Schema $schema
+     * @return Schema
+     */
     public static function configure(Schema $schema): Schema
     {
         $systemParam = request()->route('system');

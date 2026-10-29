@@ -8,6 +8,11 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
+/**
+ * Class ResetPasswordMail
+ *
+ * Reset Password Mail.
+ */
 class ResetPasswordMail extends Mailable
 {
     use Queueable, SerializesModels;
@@ -22,6 +27,7 @@ class ResetPasswordMail extends Mailable
 
     /**
      * Get the message envelope.
+     * @return Envelope
      */
     public function envelope(): Envelope
     {
@@ -32,6 +38,7 @@ class ResetPasswordMail extends Mailable
 
     /**
      * Get the message content definition.
+     * @return Content
      */
     public function content(): Content
     {

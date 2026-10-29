@@ -29,6 +29,11 @@ use Filament\Tables\Table;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rules\Unique;
 
+/**
+ * Class RoleResource
+ *
+ * Role Resource.
+ */
 class RoleResource extends Resource
 {
     use Essentials\BelongsToParent;
@@ -40,6 +45,12 @@ class RoleResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'name';
 
+    /**
+     * Execute Form operation.
+     *
+     * @param Schema $schema
+     * @return Schema
+     */
     public static function form(Schema $schema): Schema
     {
         return $schema
@@ -85,6 +96,12 @@ class RoleResource extends Resource
             ]);
     }
 
+    /**
+     * Execute Table operation.
+     *
+     * @param Table $table
+     * @return Table
+     */
     public static function table(Table $table): Table
     {
         return $table
@@ -126,6 +143,11 @@ class RoleResource extends Resource
             ]);
     }
 
+    /**
+     * Execute Get Relations operation.
+     *
+     * @return array
+     */
     public static function getRelations(): array
     {
         return [
@@ -133,6 +155,11 @@ class RoleResource extends Resource
         ];
     }
 
+    /**
+     * Execute Get Pages operation.
+     *
+     * @return array
+     */
     public static function getPages(): array
     {
         return [
@@ -143,26 +170,52 @@ class RoleResource extends Resource
         ];
     }
 
+    /**
+     * Execute Get Model operation.
+     *
+     * @return string
+     */
     public static function getModel(): string
     {
         return Utils::getRoleModel();
     }
 
+    /**
+     * Execute Get Slug operation.
+     *
+     * @param ?Panel $panel
+     * @return string
+     */
     public static function getSlug(?Panel $panel = null): string
     {
         return Utils::getResourceSlug();
     }
 
+    /**
+     * Execute Get Cluster operation.
+     *
+     * @return ?string
+     */
     public static function getCluster(): ?string
     {
         return Utils::getResourceCluster();
     }
 
+    /**
+     * Execute Get Essentials Plugin operation.
+     *
+     * @return ?FilamentShieldPlugin
+     */
     public static function getEssentialsPlugin(): ?FilamentShieldPlugin
     {
         return FilamentShieldPlugin::get();
     }
 
+    /**
+     * Execute Get Tab Form Component For Custom Permissions operation.
+     *
+     * @return \Filament\Schemas\Components\Component
+     */
     public static function getTabFormComponentForCustomPermissions(): \Filament\Schemas\Components\Component
     {
         $groupedCustomPermissions = static::getGroupedCustomPermissions();
@@ -200,6 +253,11 @@ class RoleResource extends Resource
             ]);
     }
 
+    /**
+     * Execute Get Grouped Custom Permissions operation.
+     *
+     * @return array
+     */
     protected static function getGroupedCustomPermissions(): array
     {
         $allPermissions = \App\Models\Permission::pluck('name', 'name')->toArray();

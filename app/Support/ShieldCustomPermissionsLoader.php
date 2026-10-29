@@ -5,6 +5,11 @@ namespace App\Support;
 use App\Models\Permission;
 use BezhanSalleh\FilamentShield\Facades\FilamentShield;
 
+/**
+ * Class ShieldCustomPermissionsLoader
+ *
+ * Shield Custom Permissions Loader.
+ */
 class ShieldCustomPermissionsLoader
 {
     /**

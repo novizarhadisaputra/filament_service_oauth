@@ -12,6 +12,11 @@ use Livewire\Attributes\Title;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 
+/**
+ * Class ResetPassword
+ *
+ * Reset Password.
+ */
 #[Title('Reset Password')]
 #[Layout('components.layouts.guest')]
 class ResetPassword extends Component
@@ -26,12 +31,20 @@ class ResetPassword extends Component
 
     public string $passwordConfirmation = '';
 
+    /**
+     * Execute Mount operation.
+     *
+     * @param string $token
+     */
     public function mount(string $token)
     {
         $this->token = $token;
         $this->email = request()->query('email', '');
     }
 
+    /**
+     * Execute Reset Password operation.
+     */
     public function resetPassword()
     {
         $this->validate();
@@ -62,6 +75,9 @@ class ResetPassword extends Component
         $this->addError('email', __($status));
     }
 
+    /**
+     * Execute Render operation.
+     */
     public function render()
     {
         return view('livewire.auth.reset-password');

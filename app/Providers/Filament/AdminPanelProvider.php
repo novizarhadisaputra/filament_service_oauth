@@ -22,8 +22,19 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 
+/**
+ * Class AdminPanelProvider
+ *
+ * Admin Panel Provider.
+ */
 class AdminPanelProvider extends PanelProvider
 {
+    /**
+     * Execute Panel operation.
+     *
+     * @param Panel $panel
+     * @return Panel
+     */
     public function panel(Panel $panel): Panel
     {
         return $panel

@@ -4,10 +4,16 @@ namespace App\Http\Requests\Api;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * Class Confirm2faRequest
+ *
+ * Confirm2fa Request.
+ */
 class Confirm2faRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
+     * @return bool
      */
     public function authorize(): bool
     {

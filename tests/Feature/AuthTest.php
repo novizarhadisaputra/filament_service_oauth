@@ -5,9 +5,18 @@ namespace Tests\Feature;
 use App\Models\User;
 use Tests\TestCase;
 
+/**
+ * Class AuthTest
+ *
+ * Auth Test.
+ */
 class AuthTest extends TestCase
 {
 
+    /**
+     * Execute Set Up operation.
+     * @return void
+     */
     protected function setUp(): void
     {
         parent::setUp();

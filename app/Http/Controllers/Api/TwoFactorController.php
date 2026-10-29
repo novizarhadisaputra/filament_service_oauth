@@ -13,12 +13,19 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
+/**
+ * Class TwoFactorController
+ *
+ * Two Factor Controller.
+ */
 class TwoFactorController extends Controller
 {
     use ApiResponse;
 
     /**
      * Get 2FA status for the authenticated user.
+     * @param Request $request
+     * @return JsonResponse
      */
     public function status(Request $request): JsonResponse
     {
@@ -32,6 +39,9 @@ class TwoFactorController extends Controller
 
     /**
      * Initiate 2FA setup: generate secret, OTP URL, and 100% offline SVG QR Code.
+     * @param Request $request
+     * @param TwoFactorService $twoFactorService
+     * @return JsonResponse
      */
     public function setup(Request $request, TwoFactorService $twoFactorService): JsonResponse
     {
@@ -57,6 +67,9 @@ class TwoFactorController extends Controller
 
     /**
      * Confirm 2FA setup with initial code.
+     * @param Confirm2faRequest $request
+     * @param TwoFactorService $twoFactorService
+     * @return JsonResponse
      */
     public function confirm(Confirm2faRequest $request, TwoFactorService $twoFactorService): JsonResponse
     {
@@ -81,6 +94,9 @@ class TwoFactorController extends Controller
 
     /**
      * Disable 2FA for the authenticated user.
+     * @param Disable2faRequest $request
+     * @param TwoFactorService $twoFactorService
+     * @return JsonResponse
      */
     public function disable(Disable2faRequest $request, TwoFactorService $twoFactorService): JsonResponse
     {

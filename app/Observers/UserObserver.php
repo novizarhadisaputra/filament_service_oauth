@@ -7,10 +7,16 @@ use Filament\Facades\Filament;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
+/**
+ * Class UserObserver
+ *
+ * User Observer.
+ */
 class UserObserver
 {
     /**
      * Handle the User "creating" event.
+     * @param User $user
      */
     public function creating(User $user): void
     {
@@ -23,6 +29,7 @@ class UserObserver
 
     /**
      * Handle the User "created" event.
+     * @param User $user
      */
     public function created(User $user): void
     {

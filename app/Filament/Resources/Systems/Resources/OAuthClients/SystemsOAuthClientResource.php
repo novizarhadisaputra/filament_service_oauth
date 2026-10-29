@@ -15,6 +15,11 @@ use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 
+/**
+ * Class SystemsOAuthClientResource
+ *
+ * Systems O Auth Client Resource.
+ */
 class SystemsOAuthClientResource extends Resource
 {
     protected static ?string $model = OAuthClient::class;
@@ -25,6 +30,11 @@ class SystemsOAuthClientResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'name';
 
+    /**
+     * Execute Get Parent Resource Registration operation.
+     *
+     * @return \Filament\Resources\ParentResourceRegistration
+     */
     public static function getParentResourceRegistration(): \Filament\Resources\ParentResourceRegistration
     {
         return parent::getParentResourceRegistration()
@@ -32,16 +42,33 @@ class SystemsOAuthClientResource extends Resource
             ->inverseRelationship('system');
     }
 
+    /**
+     * Execute Form operation.
+     *
+     * @param Schema $schema
+     * @return Schema
+     */
     public static function form(Schema $schema): Schema
     {
         return OAuthClientForm::configure($schema);
     }
 
+    /**
+     * Execute Table operation.
+     *
+     * @param Table $table
+     * @return Table
+     */
     public static function table(Table $table): Table
     {
         return OAuthClientsTable::configure($table);
     }
 
+    /**
+     * Execute Get Relations operation.
+     *
+     * @return array
+     */
     public static function getRelations(): array
     {
         return [
@@ -49,6 +76,11 @@ class SystemsOAuthClientResource extends Resource
         ];
     }
 
+    /**
+     * Execute Get Pages operation.
+     *
+     * @return array
+     */
     public static function getPages(): array
     {
         return [

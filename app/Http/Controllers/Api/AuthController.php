@@ -16,12 +16,19 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
+/**
+ * Class AuthController
+ *
+ * Auth Controller.
+ */
 class AuthController extends Controller
 {
     use ApiResponse;
 
     /**
      * Register a new user.
+     * @param RegisterRequest $request
+     * @return JsonResponse
      */
     public function register(RegisterRequest $request): JsonResponse
     {
@@ -42,6 +49,9 @@ class AuthController extends Controller
 
     /**
      * Login user and create token.
+     * @param LoginRequest $request
+     * @param TwoFactorService $twoFactorService
+     * @return JsonResponse
      */
     public function login(LoginRequest $request, TwoFactorService $twoFactorService): JsonResponse
     {
@@ -88,6 +98,9 @@ class AuthController extends Controller
 
     /**
      * Verify 2FA code and complete login.
+     * @param Verify2faRequest $request
+     * @param TwoFactorService $twoFactorService
+     * @return JsonResponse
      */
     public function verify2fa(Verify2faRequest $request, TwoFactorService $twoFactorService): JsonResponse
     {
@@ -124,6 +137,8 @@ class AuthController extends Controller
 
     /**
      * Get the authenticated User for Socialite (Flat response).
+     * @param Request $request
+     * @return UserResource
      */
     public function user(Request $request): UserResource
     {
@@ -153,6 +168,8 @@ class AuthController extends Controller
 
     /**
      * Get the authenticated User.
+     * @param Request $request
+     * @return JsonResponse
      */
     public function me(Request $request): JsonResponse
     {
@@ -161,6 +178,8 @@ class AuthController extends Controller
 
     /**
      * Logout user (Revoke the token).
+     * @param Request $request
+     * @return JsonResponse
      */
     public function logout(Request $request): JsonResponse
     {

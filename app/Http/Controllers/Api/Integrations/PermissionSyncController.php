@@ -10,12 +10,19 @@ use App\Models\System;
 use App\Traits\ApiResponse;
 use Illuminate\Http\JsonResponse;
 
+/**
+ * Class PermissionSyncController
+ *
+ * Permission Sync Controller.
+ */
 class PermissionSyncController extends Controller
 {
     use ApiResponse;
 
     /**
      * Sync permissions from a system.
+     * @param PermissionSyncRequest $request
+     * @return JsonResponse
      */
     public function sync(PermissionSyncRequest $request): JsonResponse
     {

@@ -13,6 +13,27 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Laravel\Passport\Client as PassportClient;
 
+/**
+ * Class OAuthClient
+ *
+ * Represents O Auth Client database entity.
+ *
+ * @property mixed $client_id
+ * @property mixed $owner_id
+ * @property mixed $owner_type
+ * @property mixed $name
+ * @property mixed $secret
+ * @property mixed $client_secret
+ * @property mixed $encrypted_secret
+ * @property mixed $provider
+ * @property mixed $redirect_uris
+ * @property mixed $grant_types
+ * @property mixed $password_client
+ * @property mixed $personal_access_client
+ * @property mixed $revoked
+ * @property-read mixed $system
+ * @property-read mixed $confidential
+ */
 #[ObservedBy(OAuthClientObserver::class)]
 class OAuthClient extends PassportClient
 {
@@ -118,6 +139,11 @@ class OAuthClient extends PassportClient
         'revoked',
     ];
 
+    /**
+     * Get the associated system relationship.
+     *
+     * @return BelongsTo
+     */
     public function system(): BelongsTo
     {
         return $this->belongsTo(System::class, 'owner_id');

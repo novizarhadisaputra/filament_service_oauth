@@ -18,6 +18,23 @@ use Illuminate\Support\Collection;
 use Laravel\Passport\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 
+/**
+ * Class User
+ *
+ * Represents User database entity.
+ *
+ * @property mixed $name
+ * @property mixed $email
+ * @property mixed $username
+ * @property mixed $password
+ * @property mixed $metadata
+ * @property mixed $two_factor_secret
+ * @property mixed $two_factor_recovery_codes
+ * @property mixed $two_factor_confirmed_at
+ * @property-read mixed $getProviderName
+ * @property-read mixed $systems
+ * @property-read mixed $hasTwoFactorEnabled
+ */
 #[ObservedBy(UserObserver::class)]
 class User extends Authenticatable implements FilamentUser, HasTenants
 {
@@ -123,6 +140,11 @@ class User extends Authenticatable implements FilamentUser, HasTenants
         return $this->systems;
     }
 
+    /**
+     * Get the associated systems relationship.
+     *
+     * @return BelongsTo
+     */
     public function systems(): BelongsToMany
     {
         return $this->belongsToMany(System::class)

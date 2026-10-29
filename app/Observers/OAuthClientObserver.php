@@ -7,10 +7,16 @@ use App\Models\System;
 use Filament\Facades\Filament;
 use Illuminate\Support\Str;
 
+/**
+ * Class OAuthClientObserver
+ *
+ * O Auth Client Observer.
+ */
 class OAuthClientObserver
 {
     /**
      * Handle the OAuthClient "creating" event.
+     * @param OAuthClient $client
      */
     public function creating(OAuthClient $client): void
     {
@@ -37,6 +43,7 @@ class OAuthClientObserver
 
     /**
      * Handle the OAuthClient "updating" event.
+     * @param OAuthClient $client
      */
     public function updating(OAuthClient $client): void
     {
@@ -45,6 +52,7 @@ class OAuthClientObserver
 
     /**
      * Ensure redirect_uris and grant_types are arrays if strings are provided.
+     * @param OAuthClient $client
      */
     protected function ensureArrayFields(OAuthClient $client): void
     {

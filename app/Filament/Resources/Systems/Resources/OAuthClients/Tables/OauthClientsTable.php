@@ -15,8 +15,19 @@ use Filament\Tables\Table;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Hash;
 
+/**
+ * Class OAuthClientsTable
+ *
+ * O Auth Clients Table.
+ */
 class OAuthClientsTable
 {
+    /**
+     * Execute Configure operation.
+     *
+     * @param Table $table
+     * @return Table
+     */
     public static function configure(Table $table): Table
     {
         return $table

@@ -12,6 +12,11 @@ enum GrantType: string implements HasLabel
     case RefreshToken = 'refresh_token';
     case Implicit = 'implicit';
 
+    /**
+     * Execute Get Label operation.
+     *
+     * @return ?string
+     */
     public function getLabel(): ?string
     {
         return match ($this) {

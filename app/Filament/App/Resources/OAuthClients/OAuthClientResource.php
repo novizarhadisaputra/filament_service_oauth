@@ -14,6 +14,11 @@ use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 
+/**
+ * Class OAuthClientResource
+ *
+ * O Auth Client Resource.
+ */
 class OAuthClientResource extends Resource
 {
     protected static ?string $model = OAuthClient::class;
@@ -28,16 +33,33 @@ class OAuthClientResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedKey;
 
+    /**
+     * Execute Form operation.
+     *
+     * @param Schema $schema
+     * @return Schema
+     */
     public static function form(Schema $schema): Schema
     {
         return OAuthClientForm::configure($schema);
     }
 
+    /**
+     * Execute Table operation.
+     *
+     * @param Table $table
+     * @return Table
+     */
     public static function table(Table $table): Table
     {
         return OAuthClientsTable::configure($table);
     }
 
+    /**
+     * Execute Get Relations operation.
+     *
+     * @return array
+     */
     public static function getRelations(): array
     {
         return [
@@ -45,6 +67,11 @@ class OAuthClientResource extends Resource
         ];
     }
 
+    /**
+     * Execute Get Pages operation.
+     *
+     * @return array
+     */
     public static function getPages(): array
     {
         return [

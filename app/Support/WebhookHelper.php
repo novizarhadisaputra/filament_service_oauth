@@ -7,6 +7,11 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Crypt;
 use App\Models\OAuthClient;
 
+/**
+ * Class WebhookHelper
+ *
+ * Webhook Helper.
+ */
 class WebhookHelper
 {
     /**

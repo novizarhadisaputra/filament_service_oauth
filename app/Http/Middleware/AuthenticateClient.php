@@ -8,12 +8,20 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Symfony\Component\HttpFoundation\Response;
 
+/**
+ * Class AuthenticateClient
+ *
+ * Authenticate Client.
+ */
 class AuthenticateClient
 {
     use ApiResponse;
 
     /**
      * Handle an incoming request.
+     * @param Request $request
+     * @param Closure $next
+     * @return Response
      */
     public function handle(Request $request, Closure $next): Response
     {

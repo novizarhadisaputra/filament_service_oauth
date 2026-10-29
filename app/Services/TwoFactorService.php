@@ -11,10 +11,18 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
 use PragmaRX\Google2FA\Google2FA;
 
+/**
+ * Class TwoFactorService
+ *
+ * Two Factor Service.
+ */
 class TwoFactorService
 {
     protected Google2FA $google2fa;
 
+    /**
+     * Initialize a new instance.
+     */
     public function __construct()
     {
         $this->google2fa = new Google2FA();
@@ -24,6 +32,7 @@ class TwoFactorService
 
     /**
      * Generate a new base32 secret key.
+     * @return string
      */
     public function generateSecretKey(): string
     {
@@ -32,6 +41,9 @@ class TwoFactorService
 
     /**
      * Generate the otpauth:// URI for Authenticator apps.
+     * @param User $user
+     * @param string $secret
+     * @return string
      */
     public function getOtpAuthUrl(User $user, string $secret): string
     {
@@ -47,6 +59,8 @@ class TwoFactorService
 
     /**
      * Generate local SVG QR code (100% offline, zero external requests).
+     * @param string $otpAuthUrl
+     * @return string
      */
     public function getQrCodeSvg(string $otpAuthUrl): string
     {
@@ -61,6 +75,8 @@ class TwoFactorService
 
     /**
      * Generate emergency recovery codes.
+     * @param int $amount
+     * @return array
      */
     public function generateRecoveryCodes(int $amount = 8): array
     {
@@ -74,6 +90,11 @@ class TwoFactorService
 
     /**
      * Confirm and activate 2FA for a user.
+     * @param User $user
+     * @param string $secret
+     * @param string $code
+     * @param array $recoveryCodes
+     * @return bool
      */
     public function confirm(User $user, string $secret, string $code, array $recoveryCodes = []): bool
     {
@@ -91,6 +112,8 @@ class TwoFactorService
 
     /**
      * Disable 2FA for a user.
+     * @param User $user
+     * @return bool
      */
     public function disable(User $user): bool
     {
@@ -104,6 +127,9 @@ class TwoFactorService
 
     /**
      * Verify submitted 2FA code (TOTP or recovery code).
+     * @param User $user
+     * @param string $code
+     * @return bool
      */
     public function verify(User $user, string $code): bool
     {
@@ -139,6 +165,8 @@ class TwoFactorService
 
     /**
      * Create short-lived pre-auth token for 2FA challenge (5 minutes TTL).
+     * @param User $user
+     * @return string
      */
     public function createPreAuthToken(User $user): string
     {
@@ -150,6 +178,8 @@ class TwoFactorService
 
     /**
      * Resolve user from pre-auth token.
+     * @param string $token
+     * @return ?User
      */
     public function resolvePreAuthUser(string $token): ?User
     {
@@ -163,6 +193,7 @@ class TwoFactorService
 
     /**
      * Consume pre-auth token upon successful verification.
+     * @param string $token
      */
     public function consumePreAuthToken(string $token): void
     {

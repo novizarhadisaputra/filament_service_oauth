@@ -7,11 +7,18 @@ use Laravel\Passport\Client;
 use Laravel\Passport\ClientRepository;
 use Laravel\Passport\Passport;
 
+/**
+ * Class CustomClientRepository
+ *
+ * Custom Client Repository.
+ */
 class CustomClientRepository extends ClientRepository
 {
     /**
      * Get a client by the given ID.
      * Overridden to support lookup by 'client_id' (string) or 'id' (UUID).
+     * @param string|int $id
+     * @return ?Client
      */
     public function find(string|int $id): ?Client
     {

@@ -8,6 +8,11 @@ use Livewire\Attributes\Title;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 
+/**
+ * Class ForgotPassword
+ *
+ * Forgot Password.
+ */
 #[Title('Forgot Password')]
 #[Layout('components.layouts.guest')]
 class ForgotPassword extends Component
@@ -17,6 +22,9 @@ class ForgotPassword extends Component
 
     public ?string $status = null;
 
+    /**
+     * Execute Send Reset Link operation.
+     */
     public function sendResetLink()
     {
         $this->validate();
@@ -33,6 +41,9 @@ class ForgotPassword extends Component
         }
     }
 
+    /**
+     * Execute Render operation.
+     */
     public function render()
     {
         return view('livewire.auth.forgot-password');

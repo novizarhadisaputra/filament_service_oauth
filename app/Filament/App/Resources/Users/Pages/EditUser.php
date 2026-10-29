@@ -6,12 +6,23 @@ use App\Filament\App\Resources\Users\UserResource;
 use Filament\Actions\DeleteAction;
 use Filament\Resources\Pages\EditRecord;
 
+/**
+ * Class EditUser
+ *
+ * Edit User.
+ */
 class EditUser extends EditRecord
 {
     protected static string $resource = UserResource::class;
 
     protected array $rolesToSave = [];
 
+    /**
+     * Execute Mount operation.
+     *
+     * @param int|string $record
+     * @return void
+     */
     public function mount(int|string $record): void
     {
         $teamId = \Filament\Facades\Filament::getTenant()?->id ?? request()->route('tenant');
@@ -22,6 +33,12 @@ class EditUser extends EditRecord
         parent::mount($record);
     }
 
+    /**
+     * Execute Mutate Form Data Before Save operation.
+     *
+     * @param array $data
+     * @return array
+     */
     protected function mutateFormDataBeforeSave(array $data): array
     {
         if (isset($data['roles'])) {
@@ -32,6 +49,10 @@ class EditUser extends EditRecord
         return $data;
     }
 
+    /**
+     * Execute Before Save operation.
+     * @return void
+     */
     protected function beforeSave(): void
     {
         $teamId = \Filament\Facades\Filament::getTenant()?->id ?? request()->route('tenant');
@@ -41,6 +62,10 @@ class EditUser extends EditRecord
         }
     }
 
+    /**
+     * Execute After Save operation.
+     * @return void
+     */
     protected function afterSave(): void
     {
         $teamId = \Filament\Facades\Filament::getTenant()?->id ?? request()->route('tenant');
@@ -53,6 +78,11 @@ class EditUser extends EditRecord
         }
     }
 
+    /**
+     * Execute Get Header Actions operation.
+     *
+     * @return array
+     */
     protected function getHeaderActions(): array
     {
         return [

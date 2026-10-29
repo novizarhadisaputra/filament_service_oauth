@@ -11,12 +11,22 @@ use Filament\Resources\Pages\EditRecord;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 
+/**
+ * Class EditRole
+ *
+ * Edit Role.
+ */
 class EditRole extends EditRecord
 {
     public Collection $permissions;
 
     protected static string $resource = RoleResource::class;
 
+    /**
+     * Execute Get Actions operation.
+     *
+     * @return array
+     */
     protected function getActions(): array
     {
         return [
@@ -24,6 +34,12 @@ class EditRole extends EditRecord
         ];
     }
 
+    /**
+     * Execute Mutate Form Data Before Save operation.
+     *
+     * @param array $data
+     * @return array
+     */
     protected function mutateFormDataBeforeSave(array $data): array
     {
         $this->permissions = collect($data)
@@ -39,6 +55,10 @@ class EditRole extends EditRecord
         return Arr::only($data, ['name', 'guard_name']);
     }
 
+    /**
+     * Execute After Save operation.
+     * @return void
+     */
     protected function afterSave(): void
     {
         $permissionModels = collect();

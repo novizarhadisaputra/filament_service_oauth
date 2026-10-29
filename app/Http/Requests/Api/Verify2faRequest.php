@@ -4,10 +4,16 @@ namespace App\Http\Requests\Api;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * Class Verify2faRequest
+ *
+ * Verify2fa Request.
+ */
 class Verify2faRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
+     * @return bool
      */
     public function authorize(): bool
     {
@@ -16,6 +22,7 @@ class Verify2faRequest extends FormRequest
 
     /**
      * Get the validation rules that apply to the request.
+     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
     public function rules(): array
     {

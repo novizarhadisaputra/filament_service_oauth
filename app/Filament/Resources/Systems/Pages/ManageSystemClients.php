@@ -8,6 +8,11 @@ use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ManageRelatedRecords;
 use Filament\Tables\Table;
 
+/**
+ * Class ManageSystemClients
+ *
+ * Manage System Clients.
+ */
 class ManageSystemClients extends ManageRelatedRecords
 {
     protected static string $resource = SystemResource::class;
@@ -22,6 +27,12 @@ class ManageSystemClients extends ManageRelatedRecords
 
     protected static ?string $slug = 'oauth-clients';
 
+    /**
+     * Execute Table operation.
+     *
+     * @param Table $table
+     * @return Table
+     */
     public function table(Table $table): Table
     {
         return SystemsOAuthClientResource::table($table)
@@ -29,6 +40,11 @@ class ManageSystemClients extends ManageRelatedRecords
             ]);
     }
 
+    /**
+     * Execute Get Breadcrumbs operation.
+     *
+     * @return array
+     */
     public function getBreadcrumbs(): array
     {
         $resource = static::getResource();

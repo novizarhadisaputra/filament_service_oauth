@@ -7,6 +7,11 @@ use App\Models\System;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
+/**
+ * Class DatabaseSeeder
+ *
+ * Database Seeder.
+ */
 class DatabaseSeeder extends Seeder
 {
     /**

@@ -7,12 +7,21 @@ use App\Models\Role;
 use App\Models\System;
 use Filament\Resources\Pages\CreateRecord;
 
+/**
+ * Class CreateUser
+ *
+ * Create User.
+ */
 class CreateUser extends CreateRecord
 {
     protected static string $resource = UserResource::class;
 
     protected array $rolesToSave = [];
 
+    /**
+     * Execute Mount operation.
+     * @return void
+     */
     public function mount(): void
     {
         $parent = $this->getParentRecord();
@@ -26,6 +35,12 @@ class CreateUser extends CreateRecord
         parent::mount();
     }
 
+    /**
+     * Execute Mutate Form Data Before Create operation.
+     *
+     * @param array $data
+     * @return array
+     */
     protected function mutateFormDataBeforeCreate(array $data): array
     {
         if (isset($data['roles'])) {
@@ -36,6 +51,10 @@ class CreateUser extends CreateRecord
         return $data;
     }
 
+    /**
+     * Execute After Create operation.
+     * @return void
+     */
     protected function afterCreate(): void
     {
         $parent = $this->getParentRecord();

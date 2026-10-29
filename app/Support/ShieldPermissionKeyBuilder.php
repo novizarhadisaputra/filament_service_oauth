@@ -4,10 +4,21 @@ namespace App\Support;
 
 use BezhanSalleh\FilamentShield\Facades\FilamentShield;
 
+/**
+ * Class ShieldPermissionKeyBuilder
+ *
+ * Shield Permission Key Builder.
+ */
 class ShieldPermissionKeyBuilder
 {
     /**
      * Custom permission key composition builder for Filament Shield.
+     * @param string $entity
+     * @param ?string $affix
+     * @param string $subject
+     * @param string $case
+     * @param string $separator
+     * @return string
      */
     public function __invoke(string $entity, ?string $affix, string $subject, string $case, string $separator): string
     {

@@ -7,8 +7,17 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Spatie\Permission\PermissionRegistrar;
 
+/**
+ * Class ShieldSeeder
+ *
+ * Shield Seeder.
+ */
 class ShieldSeeder extends Seeder
 {
+    /**
+     * Execute Run operation.
+     * @return void
+     */
     public function run(): void
     {
         app()[PermissionRegistrar::class]->forgetCachedPermissions();
@@ -1203,6 +1212,12 @@ class ShieldSeeder extends Seeder
         $this->command->info('Shield Seeding Completed.');
     }
 
+    /**
+     * Execute Seed Tenants operation.
+     *
+     * @param string $tenants
+     * @return void
+     */
     protected static function seedTenants(string $tenants): void
     {
         if (blank($tenantData = json_decode($tenants, true))) {
@@ -1222,6 +1237,12 @@ class ShieldSeeder extends Seeder
         }
     }
 
+    /**
+     * Execute Seed Users operation.
+     *
+     * @param string $users
+     * @return void
+     */
     protected static function seedUsers(string $users): void
     {
         if (blank($userData = json_decode($users, true))) {
@@ -1270,6 +1291,12 @@ class ShieldSeeder extends Seeder
         }
     }
 
+    /**
+     * Execute Seed User Tenant Pivot operation.
+     *
+     * @param string $pivot
+     * @return void
+     */
     protected static function seedUserTenantPivot(string $pivot): void
     {
         if (blank($pivotData = json_decode($pivot, true))) {
@@ -1299,6 +1326,12 @@ class ShieldSeeder extends Seeder
         }
     }
 
+    /**
+     * Execute Make Roles With Permissions operation.
+     *
+     * @param string $rolesWithPermissions
+     * @return void
+     */
     protected static function makeRolesWithPermissions(string $rolesWithPermissions): void
     {
         if (blank($rolePlusPermissions = json_decode($rolesWithPermissions, true))) {
@@ -1353,6 +1386,12 @@ class ShieldSeeder extends Seeder
         }
     }
 
+    /**
+     * Execute Make Direct Permissions operation.
+     *
+     * @param string $directPermissions
+     * @return void
+     */
     public static function makeDirectPermissions(string $directPermissions): void
     {
         if (blank($permissions = json_decode($directPermissions, true))) {

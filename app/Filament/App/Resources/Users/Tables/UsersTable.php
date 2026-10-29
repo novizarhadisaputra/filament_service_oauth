@@ -13,8 +13,19 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Support\Facades\DB;
 
+/**
+ * Class UsersTable
+ *
+ * Users Table.
+ */
 class UsersTable
 {
+    /**
+     * Execute Configure operation.
+     *
+     * @param Table $table
+     * @return Table
+     */
     public static function configure(Table $table): Table
     {
         return $table

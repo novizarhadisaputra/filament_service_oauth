@@ -11,6 +11,22 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 
+/**
+ * Class System
+ *
+ * Represents System database entity.
+ *
+ * @property mixed $name
+ * @property mixed $slug
+ * @property mixed $system_code
+ * @property mixed $description
+ * @property mixed $is_active
+ * @property mixed $requires_2fa
+ * @property mixed $is_internal
+ * @property-read mixed $roles
+ * @property-read mixed $users
+ * @property-read mixed $clients
+ */
 #[ObservedBy(SystemObserver::class)]
 class System extends Model
 {
@@ -44,11 +60,21 @@ class System extends Model
         ];
     }
 
+    /**
+     * Get the associated roles relationship.
+     *
+     * @return HasMany
+     */
     public function roles(): HasMany
     {
         return $this->hasMany(Role::class, 'team_id');
     }
 
+    /**
+     * Get the associated users relationship.
+     *
+     * @return BelongsTo
+     */
     public function users(): BelongsToMany
     {
         return $this->belongsToMany(User::class)
@@ -56,6 +82,11 @@ class System extends Model
             ->withTimestamps();
     }
 
+    /**
+     * Get the associated clients relationship.
+     *
+     * @return MorphMany
+     */
     public function clients(): MorphMany
     {
         return $this->morphMany(OAuthClient::class, 'owner');

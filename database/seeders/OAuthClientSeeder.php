@@ -5,6 +5,11 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
+/**
+ * Class OAuthClientSeeder
+ *
+ * O Auth Client Seeder.
+ */
 class OAuthClientSeeder extends Seeder
 {
     /**

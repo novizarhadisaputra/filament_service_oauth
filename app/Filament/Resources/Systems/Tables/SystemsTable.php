@@ -7,8 +7,19 @@ use Filament\Actions\Action;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
+/**
+ * Class SystemsTable
+ *
+ * Systems Table.
+ */
 class SystemsTable
 {
+    /**
+     * Execute Configure operation.
+     *
+     * @param Table $table
+     * @return Table
+     */
     public static function configure(Table $table): Table
     {
         return $table

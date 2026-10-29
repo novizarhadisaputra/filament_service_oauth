@@ -7,12 +7,22 @@ use Filament\Forms\Components\TextInput;
 use Filament\Resources\Pages\CreateRecord;
 use Filament\Schemas\Components\Wizard\Step;
 
+/**
+ * Class CreateOAuthClient
+ *
+ * Create O Auth Client.
+ */
 class CreateOAuthClient extends CreateRecord
 {
     use CreateRecord\Concerns\HasWizard;
 
     protected static string $resource = OAuthClientResource::class;
 
+    /**
+     * Execute Get Steps operation.
+     *
+     * @return array
+     */
     protected function getSteps(): array
     {
         return [

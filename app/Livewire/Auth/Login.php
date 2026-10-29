@@ -13,6 +13,11 @@ use Livewire\Attributes\Title;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 
+/**
+ * Class Login
+ *
+ * Login.
+ */
 #[Title('Login')]
 #[Layout('components.layouts.guest')]
 class Login extends Component
@@ -33,6 +38,9 @@ class Login extends Component
 
     public ?string $pendingUserId = null;
 
+    /**
+     * Execute Mount operation.
+     */
     public function mount()
     {
         $intendedUrl = session()->get('url.intended');
@@ -51,6 +59,9 @@ class Login extends Component
         }
     }
 
+    /**
+     * Execute Authenticate operation.
+     */
     public function authenticate()
     {
         $this->validate([
@@ -83,6 +94,11 @@ class Login extends Component
         return redirect()->intended(route('filament.admin.pages.dashboard'));
     }
 
+    /**
+     * Execute Verify Two Factor operation.
+     *
+     * @param TwoFactorService $twoFactorService
+     */
     public function verifyTwoFactor(TwoFactorService $twoFactorService)
     {
         $this->validate([
@@ -108,6 +124,9 @@ class Login extends Component
         return redirect()->intended(route('filament.admin.pages.dashboard'));
     }
 
+    /**
+     * Execute Back To Login operation.
+     */
     public function backToLogin()
     {
         $this->step = 'login';
@@ -115,6 +134,9 @@ class Login extends Component
         $this->pendingUserId = null;
     }
 
+    /**
+     * Execute Render operation.
+     */
     public function render()
     {
         return view('livewire.auth.login');

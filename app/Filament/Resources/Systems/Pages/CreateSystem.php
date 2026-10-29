@@ -8,12 +8,22 @@ use Filament\Forms\Components\TextInput;
 use Filament\Resources\Pages\CreateRecord;
 use Filament\Schemas\Components\Wizard\Step;
 
+/**
+ * Class CreateSystem
+ *
+ * Create System.
+ */
 class CreateSystem extends CreateRecord
 {
     use CreateRecord\Concerns\HasWizard;
 
     protected static string $resource = SystemResource::class;
 
+    /**
+     * Execute Get Steps operation.
+     *
+     * @return array
+     */
     protected function getSteps(): array
     {
         return [

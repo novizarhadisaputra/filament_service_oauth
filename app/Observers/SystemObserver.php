@@ -5,10 +5,16 @@ namespace App\Observers;
 use App\Models\System;
 use Illuminate\Support\Str;
 
+/**
+ * Class SystemObserver
+ *
+ * System Observer.
+ */
 class SystemObserver
 {
     /**
      * Handle the System "creating" event.
+     * @param System $system
      */
     public function creating(System $system): void
     {
@@ -23,6 +29,7 @@ class SystemObserver
 
     /**
      * Handle the System "updating" event.
+     * @param System $system
      */
     public function updating(System $system): void
     {
